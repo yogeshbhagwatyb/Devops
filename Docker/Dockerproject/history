@@ -82,3 +82,22 @@
    82  cat Dockerfile
    83  cat app.py
    84  history | more
+   84  history | more
+   85  ls
+   86  cd docker_project/
+   87  vi app.py
+   88  rm app.py
+   89  vi app.py
+   90  cd ../web_app_project/
+   91  ls
+   92  cat Dockerfile
+   93  cd ../docker_project/
+   94  lvi Dockerfile
+   95  vi Dockerfile
+   96  docker build -t myimages .
+   97  cd docker_project/
+   98  docker images
+   99  python3 app.py
+  100  docker run -p 8081:80 myimages
+  101  history | more
+
