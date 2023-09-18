@@ -1,0 +1,74 @@
+# Install Node.js and npm
+# Update the package list
+sudo apt update
+
+# Install Node.js and npm
+sudo apt install nodejs npm
+
+# Create directory
+mkdir my-node-app
+cd my-node-app
+
+# Create app.js
+vi app.js 
+#######################################################
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello, Node.js!\n');
+});
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+######################################################
+
+#Install Dependencies (Optional)
+npm install
+
+#Run the Node.js Application
+node app.js
+
+#Hit the url
+http://your_server_ip:3000
+
+#Create a Dockerfile
+vi Dockerfile
+##################################################################################
+# Use an official Node.js runtime as a parent image
+FROM node:14
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install application dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app will run on
+EXPOSE 3000
+
+# Define the command to run your application
+CMD [ "node", "app.js" ]
+############################################################################################
+
+#Build the Docker Image
+docker build -t my-node-app .
+
+#Run the Docker Container
+docker run -p 3000:3000 my-node-app 
+you can use any port number like 
+docker run -p 8082:3000 my-node-app > 3000 is a application 
+docker run -p 7000:3000 my-node-app
+
+#Hit the url
+http://your_server_ip:3000
+http://your_server_ip:8082
+http://your_server_ip:7000
