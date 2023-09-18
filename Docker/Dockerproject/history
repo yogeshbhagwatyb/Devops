@@ -1,0 +1,84 @@
+    1  # Add Docker's official GPG key:
+    2  sudo apt-get update
+    3  sudo apt-get install ca-certificates curl gnupg
+    4  sudo install -m 0755 -d /etc/apt/keyrings
+    5  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    6  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    7  # Add the repository to Apt sources:
+    8  echo   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    9    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   10  sudo apt-get update
+   11  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   12  sudo docker run hello-world
+   13  docker -v
+   14  pwd
+   15  mkdir docker project
+   16  ls
+   17  rmdir docker project/
+   18  ls
+   19  mkdir docker_project
+   20  cd docker_project/
+   21  ls
+   22  sudo apt update
+   23  sudo apt install python3
+   24  puthon
+   25  python
+   26  python -help
+   27  python3 --version
+   28  sudo apt install python3-pip
+   29  pwd
+   30  cd ..
+   31  ls
+   32  python3 --version
+   33  mkdir web_app_project
+   34  ls
+   35  cd web_app_project/
+   36  vi app.py
+   37  ls
+   38  pip3 install Flask
+   39  python3 app.py
+   40  sudo ufw allow 5000/tcp
+   41  curl ifconfig.me
+   42  ufw
+   43  pwd
+   44  source venv/bin/activate
+   45  cd venv/
+   46  python3 app.py
+   47  history
+   48  cat app.py
+   49  vi app.py
+   50  cat app.py
+   51  python3 app.py
+   52  vi app.py
+   53  python3 app.py
+   54  ls
+   55  vi Dockerfile
+   56  docker build -t my-web-app .
+   57  vi Dockerfile
+   58  docker build -t my-web-app .
+   59  docker run -p 8080:80 my-web-app
+   60  ls
+   61  docker images
+   62  docker ps
+   63  docker ps -a
+   64  docker container start 6dddc9f5463e
+   65  docker ps -a
+   66  docker run -p 8080:80 my-web-app
+   67  docker run -p 8000:80 my-web-app
+   68  docker ps -a
+   69  docker rm 05c28c465e1f 191c8940d4f6 6dddc9f5463e
+   70  docker stop 6dddc9f5463e5a9faef2a9c34ec6cc1e990097988d3a0982adf48605eb80ce1d
+   71  docker ps -a
+   72  docker rm my
+   73  docker rm 6d
+   74  docker ps -a
+   75  docker run -p 8080:80 my-web-app
+   76  docker ps -a
+   77  docker stop 6
+   78  docker stop a6
+   79  docker rm a6
+   80  docker run -p 8080:5000 my-web-app
+   81  history
+   82  cat Dockerfile
+   83  cat app.py
+   84  history | more
