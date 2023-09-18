@@ -1,0 +1,38 @@
+  104  mkdir node-js
+  105  cd node-js/
+  106  ls
+  107  # Update the package list
+  108  sudo apt update
+  109  # Install Node.js and npm
+  110  sudo apt install nodejs npm
+  111  vi app.js
+  112  npm install
+  113  ls
+  114  cd node-js/
+  115  ls
+  116  cat package-lock.json
+  117  npm install
+  118  node app.js
+  119  ls
+  120  vi Dockerfile
+  121  ls
+  122  cd ..
+  123  ls
+  124  cd node-js/
+  125  docker ps -a
+  126  docker start bd
+  127  docker exec -it bdaea8a606ea /bin/bash
+  128  cd web_app_project/
+  129  Lls
+  130  ls
+  131  docker ps
+  132  docker exec -it bdaea8a606ea /bin/bash
+  133  ls
+  134  cd node-js/
+  135  ls
+  136  vi Dockerfile
+  137  ls
+  138  cd node-js/
+  139  ls
+  140  vi Dockerfile
+  141  history | more
