@@ -1,1 +1,67 @@
+#Install docker on ubuntu
+
+#Install Python and pip 
+sudo apt update
+sudo apt install python3
+
+#To install pip (Python package manager), you can use the following commands:
+sudo apt install python3-pip
+
+#Create a Project Directory
+mkdir ~/web_app_project
+cd ~/web_app_project
+
+#Create the "app.py" File
+vi app.py >> 
+# app.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, Docker!'
+
+if __name__ == '__main__':
+    # Run the app, binding to all network interfaces (0.0.0.0) on port 5000
+    app.run(host='0.0.0.0', port=5000)
+
+#Install Flask
+pip3 install Flask
+
+#Run the Flask App
+python3 app.py
+
+#Hit the url
+http://your_server_ip:5000
+
+#Create docker file 
+vi Dockerfile
+dockerfile start
+# Use the official Python image as a base image
+FROM python:3.8-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install Flask
+RUN pip install Flask
+
+# Expose port 80 for the Flask app
+EXPOSE 80
+
+# Define the command to run when the container starts
+CMD ["python", "app.py"]
+
+docker file end
+
+#Build the image
+docker build -t my-web-app .
+
+
+
+
+
 
