@@ -60,6 +60,13 @@ docker file end
 #Build the image
 docker build -t my-web-app .
 
+#Run the Docker Container
+docker run -p 8080:5000 my-web-app (In flask code bind the 5000 port so used )
+
+#Access the through web
+http://privateip:8080/
+http://3.88.255.38:8080/
+
 
 
 
