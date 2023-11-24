@@ -1,0 +1,106 @@
+######################################NEW CODE########################################################################
+import json
+import boto3
+
+# Set the AWS region
+region = 'us-east-2'
+
+# Create an EC2 client for the specified region
+ec2 = boto3.client('ec2', region_name=region)
+
+# Lambda function handler
+def lambda_handler(event, context):
+    # Extract instance IDs and action from the input event
+    instances = event["instances"].split(',')
+    action = event["action"]
+
+    # Check the action and perform the corresponding operation
+    if action == 'Start':
+        print("STARTing your instances: " + str(instances))
+        # Start the specified EC2 instances
+        ec2.start_instances(InstanceIds=instances)
+        response = "Successfully started instances: " + str(instances)
+    elif action == 'Stop':
+        print("STOPping your instances: " + str(instances))
+        # Stop the specified EC2 instances
+        ec2.stop_instances(InstanceIds=instances)
+        response = "Successfully stopped instances: " + str(instances)
+
+    # Return a response with the status code and a JSON body
+    return {
+        'statusCode': 200,
+        'body': json.dumps(response)
+    }
+
+
+######################################CODE WITH EXPLAINATION########################################################################
+import json
+import boto3
+
+# Set the AWS region >> 
+# Specifies the AWS region where the EC2 instances are located. Update this with the appropriate region for your EC2 instances.
+region = 'us-east-2'
+
+# Create an EC2 client for the specified region >>  Initializes an AWS EC2 client using the boto3 library, specifying the region.
+ec2 = boto3.client('ec2', region_name=region)
+
+# Lambda function handler
+# def lambda_handler(event, context):: This is the main Lambda function handler. It receives an event (input) and a context from AWS Lambda.
+def lambda_handler(event, context):
+    # Extract instance IDs and action from the input event
+    # Processing the input event:
+    # instances = event["instances"].split(','): Extracts the instance IDs from the input event. 
+    # The instances are expected to be passed as a comma-separated string.
+    # action = event["action"]: Extracts the action (Start or Stop) from the input event.
+    instances = event["instances"].split(',')
+    action = event["action"]
+
+    # Check the action and perform the corresponding operation
+    # Performing the specified action:
+    # The code checks whether the action is 'Start' or 'Stop' and then uses the ec2.start_instances or 
+    # ec2.stop_instances method to start or stop the specified EC2 instances.
+    if action == 'Start':
+        print("STARTing your instances: " + str(instances))
+        # Start the specified EC2 instances
+        ec2.start_instances(InstanceIds=instances)
+        response = "Successfully started instances: " + str(instances)
+    elif action == 'Stop':
+        print("STOPping your instances: " + str(instances))
+        # Stop the specified EC2 instances
+        ec2.stop_instances(InstanceIds=instances)
+        response = "Successfully stopped instances: " + str(instances)
+
+    # Return a response with the status code and a JSON body > Logging and Response: 
+    # The code prints messages indicating the action and the instances affected. 
+    # The function returns a response with a status code (200 for success) and a JSON body containing a success message.
+    return {
+        'statusCode': 200,
+        'body': json.dumps(response)
+    }
+
+
+######################################EXPLAINATION########################################################################
+
+https://chat.openai.com/share/7fdab301-c35f-4e73-b42c-b0d400682a41
+
+Setting up the AWS region:
+
+region = 'us-east-2': Specifies the AWS region where the EC2 instances are located. Update this with the appropriate region for your EC2 instances.
+Creating an EC2 client:
+
+ec2 = boto3.client('ec2', region_name=region): Initializes an AWS EC2 client using the boto3 library, specifying the region.
+Lambda function handler:
+
+def lambda_handler(event, context):: This is the main Lambda function handler. It receives an event (input) and a context from AWS Lambda.
+Processing the input event:
+
+instances = event["instances"].split(','): Extracts the instance IDs from the input event. The instances are expected to be passed as a comma-separated string.
+action = event["action"]: Extracts the action (Start or Stop) from the input event.
+Performing the specified action:
+
+The code checks whether the action is 'Start' or 'Stop' and then uses the ec2.start_instances or ec2.stop_instances method to start or stop the specified EC2 instances.
+Logging and Response:
+
+The code prints messages indicating the action and the instances affected.
+The function returns a response with a status code (200 for success) and a JSON body containing a success message.
+You can use this Lambda function with an appropriate trigger, such as an API Gateway or a CloudWatch Events rule, by configuring the input event accordingly. The function expects the input event to have a instances key with comma-separated instance IDs and an action key with the desired action ('Start' or 'Stop').
