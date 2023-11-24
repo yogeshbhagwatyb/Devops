@@ -1,0 +1,27 @@
+import json
+import boto3
+
+# Set the AWS region
+region = 'us-east-2'
+
+# Create an EC2 client for the specified region
+ec2 = boto3.client('ec2', region_name=region)
+
+# Lambda function handler
+def lambda_handler(event, context):
+    # Extract instance IDs and action from the input event
+    instances = event["instances"].split(',')
+    action = event["action"]
+
+    # Check the action and perform the corresponding operation
+    if action == 'Start':
+        print("STARTing your instances: " + str(instances))
+        # Start the specified EC2 instances
+        ec2.start_instances(InstanceIds=instances)
+        response = "Successfully started instances: " + str(instances)
+
+    # Return a response with the status code and a JSON body
+    return {
+        'statusCode': 200,
+        'body': json.dumps(response)
+    }
