@@ -1,0 +1,49 @@
+1. Cluster Information:
+Command: kubectl cluster-info
+Example: kubectl cluster-info
+Explanation: Displays information about the Kubernetes cluster, including the master and services.
+
+2. Nodes:
+Command: kubectl get nodes
+Example: kubectl get nodes
+Explanation: Lists all nodes in the cluster, providing information about their status.
+
+3. Pods:
+Command: kubectl get pods
+Example: kubectl get pods
+Explanation: Lists all pods in the default namespace, showing their names and status.
+
+4. Deployments:
+Command: kubectl get deployments
+Example: kubectl get deployments
+Explanation: Lists all deployments in the default namespace, displaying information about replicas and current replicas.
+
+5. Services:
+Command: kubectl get services
+Example: kubectl get services
+Explanation: Lists all services in the default namespace, providing information about their names and Cluster IP.
+
+6. ConfigMaps:
+Command: kubectl get configmaps
+Example: kubectl get configmaps
+Explanation: Lists all ConfigMaps in the default namespace, showing their names and data.
+
+7. Namespaces:
+Command: kubectl get namespaces
+Example: kubectl get namespaces
+Explanation: Lists all namespaces in the cluster, helping organize and isolate resources.
+
+8. Port Forwarding:
+Command: kubectl port-forward [pod-name] [local-port]:[remote-port]
+Example: kubectl port-forward mypod 8080:80
+Explanation: Forwards local port 8080 to port 80 on the pod named mypod for local access.
+
+9. Apply Configuration:
+Command: kubectl apply -f [filename]
+Example: kubectl apply -f deployment.yaml
+Explanation: Applies the configuration defined in deployment.yaml to create or update resources in the cluster.
+
+10. Delete Resource:
+Command: kubectl delete [resource-type] [resource-name]
+Example: kubectl delete pod mypod
+Explanation: Deletes the pod named mypod. Replace [resource-type] with the resource type you want to delete.
