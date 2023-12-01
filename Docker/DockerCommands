@@ -1,0 +1,42 @@
+Image Commands:
+docker images: List all local images.
+docker pull [image]: Download an image from a registry.
+docker build -t [image:tag] [path]: Build an image from a Dockerfile.
+
+Container Commands:
+docker ps: List running containers.
+docker ps -a: List all containers (including stopped ones).
+docker run [options] [image] [command] [args]: Create and start a container.
+docker exec -it [container] [command]: Execute a command inside a running container.
+docker stop [container]: Stop a running container.
+docker start [container]: Start a stopped container.
+docker restart [container]: Restart a running or stopped container.
+docker rm [container]: Remove a stopped container.
+
+Container Logs and Stats:
+docker logs [container]: View the logs of a container.
+docker stats [container]: Display a live stream of container resource usage statistics.
+
+Networking:
+docker network ls: List Docker networks.
+docker network inspect [network]: Display detailed information about a network.
+
+Volumes:
+docker volume ls: List Docker volumes.
+docker volume create [volume]: Create a Docker volume.
+docker volume inspect [volume]: Display detailed information about a volume.
+
+Registry and Repository:
+docker login: Log in to a Docker registry.
+docker push [image]: Push an image or a repository to a registry.
+docker pull [image]: Pull an image or a repository from a registry.
+
+System Commands:
+docker info: Display system-wide information.
+docker version: Show the Docker version information.
+docker system df: Show disk usage by Docker.
+
+Docker-compose Commands:
+docker-compose up: Create and start containers defined in docker-compose.yml.
+docker-compose down: Stop and remove containers, networks, and volumes defined in docker-compose.yml.
+docker-compose ps: List containers managed by docker-compose.
