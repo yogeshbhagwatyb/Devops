@@ -1,0 +1,88 @@
+1. Initialize a Repository:
+Command: git init
+Example: git init
+Explanation: Initializes a new Git repository in the current directory, creating a hidden .git subfolder to store versioning information.
+
+2. Clone a Repository:
+Command: git clone [repository-url]
+Example: git clone https://github.com/example/repo.git
+Explanation: Creates a copy of a remote repository on your local machine.
+
+3. Check Repository Status:
+Command: git status
+Example: git status
+Explanation: Shows the status of changes as untracked, modified, or staged.
+
+4. Add Changes to Staging Area:
+Command: git add [file]
+Example: git add myfile.txt
+Explanation: Adds changes in the specified file to the staging area in preparation for committing.
+
+5. Commit Changes:
+Command: git commit -m "Commit message"
+Example: git commit -m "Add new feature"
+Explanation: Records changes in the repository with a descriptive commit message.
+
+6. View Commit History:
+Command: git log
+Example: git log
+Explanation: Displays a chronological list of commits, showing commit hashes, authors, dates, and commit messages.
+
+7. Create a Branch:
+Command: git branch [branch-name]
+Example: git branch feature-branch
+Explanation: Creates a new branch with the specified name.
+
+8. Switch Branch:
+Command: git checkout [branch-name]
+Example: git checkout feature-branch
+Explanation: Switches to the specified branch.
+
+9. Merge Branches:
+Command: git merge [branch-name]
+Example: git merge feature-branch
+Explanation: Combines changes from the specified branch into the current branch.
+Suppose you have a branch called feature-branch with some changes, and you want to merge those changes into the main branch.
+# Switch to the branch where you want to merge changes
+git checkout main
+
+# Merge changes from the feature-branch into the main branch
+git merge feature-branch
+
+#Switch to the Target Branch:
+git checkout main
+
+#Merge the Changes: This command merges the changes from feature-branch into the current branch (main in this case). 
+Git automatically performs a three-way merge, combining the changes from both branches.
+git merge feature-branch
+
+Resolve Merge Conflicts (if any):
+If Git encounters conflicting changes in the merging process, it will pause and ask you to resolve conflicts manually. 
+You'll need to edit the conflicting files, mark them as resolved, and then continue the merge with:
+git merge --continue
+or for aborting
+git merge --abort
+
+Complete the Merge:
+After resolving any conflicts and making necessary changes, commit the merge:
+git commit -m "Merge changes from feature-branch"
+
+10. Push Changes to Remote Repository:
+Command: git push [remote-name] [branch-name]
+Example: git push origin main
+Explanation: Uploads local branch commits to the remote repository.
+
+11. Pull Changes from Remote Repository:
+Command: git pull [remote-name] [branch-name]
+Example: git pull origin main
+Explanation: Fetches changes from the remote repository and merges them into the local branch.
+
+12. Configure User Information:
+Command: git config --global user.name "Your Name"
+Example: git config --global user.name "John Doe"
+Explanation: Sets the author name to be used with your commits.
+
+13. Configure User Email:
+Command: git config --global user.email "your.email@example.com"
+Example: git config --global user.email "john.doe@example.com"
+Explanation: Sets the email address to be used with your commits.
