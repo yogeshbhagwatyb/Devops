@@ -1,1 +1,22 @@
-
+1/12/23
+Docker
+AWS
+Kubernetes
+Git
+Provision and managing of infrastructure on AWS cloud.
+Creation of data pipelines from RDS/DynamoDB to redshift using aws services.
+Automation of deployments using CI/CD tools.
+Troubleshoot and resolve issues related to AWS services and infrastructure.
+Implement and maintain security best practices, including IAM policies, encryption, access controls, and network security.
+Managing container-based services in production using tools such as Docker and Kubernetes.
+Managing container workloads in container orchestration platforms like Kubernetes.
+Troubleshooting issues for workload running on Kubernetes, setting up logging and monitoring, and performance tuning.
+ 
+Requirements:
+Experience on AWS cloud services(VPC, EC2, IAM, CloudFront, API Gateway, Load Balancer, Elastic Kubernetes Service, Redshift, RDS, DynamoDB, Elasticache, Kafka, Lambda, Kinesis, Athena, S3 etc.., ).
+Experience in container and container orchestration tools( Docker and Kubernetes) is must.
+Experience in version control system and source code management (git, github and gitlab etc..,).
+Experience in building & Manage the CICD pipeline through the DevOps model using Jenkins.
+Experience in Linux and Windows operating systems.
+Knowledge of networking and security.
+Knowledge on databases.
