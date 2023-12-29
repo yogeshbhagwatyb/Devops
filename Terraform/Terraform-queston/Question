@@ -1,0 +1,49 @@
+What is Infrastructure as Code?
+Infrastructure as code means writing code to provision, manage and deploy IT infrastructure.
+
+What is Terraform Provider?
+A provider in Terraform is a plugin that enables interaction with an API. This includes Cloud providers and Software-as-a-service providers. 
+The providers are specified in the Terraform configuration code. They tell Terraform which services it needs to interact with.
+In Terraform, a provider is a plugin that enables Terraform to interact with a specific infrastructure platform or service. 
+Providers are responsible for understanding the API interactions and resource lifecycle of the target platform. 
+They serve as the bridge between Terraform and the underlying infrastructure, allowing Terraform to manage resources, such as virtual machines, 
+databases, and networks.
+
+What is Terraform resource type
+In Terraform, a resource type represents a specific type of infrastructure object that can be managed by Terraform. 
+Resources are the fundamental building blocks of a Terraform configuration, and they define the desired state of a particular piece 
+of infrastructure on the target platform. 
+A resource type corresponds to a specific service or component provided by a Terraform provider.
+In Terraform, resources are the most important part of Terraform. Resources are defined by resource blocks. 
+A resource can define one or more infrastructure resource objects, such as VPCs, virtual machines, or DNS records, Consul key-value pair data, etc.
+
+What is Terraform state
+In Terraform, the state is a crucial aspect of managing infrastructure. The state represents the current state of the resources defined in your Terraform configuration. 
+It includes information about which resources are being managed, their current attribute values, and metadata needed by Terraform to orchestrate updates and 
+modifications to the infrastructure.
+Key characteristics of Terraform state include
+Terraform state is stored in a backend, which could be a local file, a remote file (such as an S3 bucket), or a state management service 
+(like Terraform Cloud). The backend is configured in the Terraform configuration or using the -backend-config option.
+terraform {
+  backend "s3" {
+    bucket = "my-terraform-state-bucket"
+    key    = "path/to/terraform.tfstate"
+    region = "us-west-2"
+  }
+}
+
+Locking:
+Terraform supports state locking to prevent multiple users or processes from modifying the state simultaneously. Locking is essential to 
+prevent conflicts when multiple Terraform executions are trying to make changes concurrently. The backend determines how locking is implemented.
+
+Sensitive Data:
+Terraform state may contain sensitive information, such as passwords or private keys. To enhance security, Terraform allows marking certain 
+attributes as sensitive, ensuring that their values are not displayed in the command-line output or stored in logs
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  key_name      = sensitive(var.key_name)
+}
+In this example, the key_name attribute is marked as sensitive.
+
+
