@@ -1,0 +1,41 @@
+/etc/passwd:
+Contains information about user accounts on the system, including usernames, user IDs (UIDs), group IDs (GIDs), home directories, and default shells.
+Example entry: username:x:1000:1000:John Doe:/home/username:/bin/bash
+
+/etc/shadow:
+Stores encrypted password and password-related information for user accounts.
+Accessible only by the root user and the shadow group.
+Example entry: username:$6$H8X0/Lu7$ExoXqQVBlMtpSG6.J7n0DvFayZ1ldSdQHLkj3aCY1QZyCJQrvEoDP8n9TQGZ5.b...:18912:0:99999:7:::
+
+/etc/group:
+Contains information about groups on the system, including group names, GIDs, and a list of member usernames.
+Example entry: groupname:x:1001:user1,user2,user3
+
+/etc/ssh/sshd_config:
+Configuration file for the OpenSSH server (sshd). Defines settings for SSH server behavior, security, and authentication.
+Example settings: Port 22, PermitRootLogin no, PasswordAuthentication yes
+
+/etc/sudoers:
+Configuration file for the sudo command. Defines which users and groups are allowed to run commands as superusers and with what privileges.
+Accessed and edited using the visudo command.
+Example entry: john ALL=(ALL:ALL) ALL
+
+/etc/profile:
+A system-wide shell initialization file executed for login shells. Defines environment variables and sets up the user's shell environment.
+System-wide configuration that affects all users.
+Commonly used to set the PATH variable and define global environment settings.
+
+/etc/hosts:
+A simple text file that maps IP addresses to hostnames and is used for local DNS resolution.
+Typically used for defining local hostnames and IP addresses, especially in small networks or for testing purposes.
+
+/etc/fstab:
+Configuration file that contains information about disk drives and partitions. Defines how and where filesystems should be mounted during the system boot process.
+Example entry: /dev/sda1 / ext4 defaults 0 1
+
+/etc/resolv.conf:
+Configuration file for DNS resolver library. Specifies the DNS servers, domain search order, and other resolver options.
+Example entry: nameserver 8.8.8.8
+
+/etc/nologin:
+A file that, when present, prevents non-root users from logging into the system. It is commonly used to temporarily disable logins during maintenance or system changes.
