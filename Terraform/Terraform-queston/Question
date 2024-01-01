@@ -46,4 +46,94 @@ resource "aws_instance" "example" {
 }
 In this example, the key_name attribute is marked as sensitive.
 
+5. Explain terraform command
+terraform init:
+This command is used to initialize a Terraform configuration.
+It downloads the provider plugins and sets up the working directory.
+
+terraform plan:
+This command is used to create an execution plan.
+It compares the current state of the infrastructure (as recorded in the Terraform state) with the desired state described in your configuration files.
+It provides information on what actions Terraform will take to bring the infrastructure to the desired state.
+
+terraform apply:
+This command is used to apply the changes proposed in a Terraform plan.
+It executes the actions described in the execution plan to reach the desired state.
+It can create, modify, or delete resources according to the configuration.
+
+terraform state:
+This command is used to interact with Terraform's state.
+It provides various subcommands to manage the Terraform state, such as listing resources, moving resources, and removing resources from the state.
+Let's delve into the details of terraform state and its subcommands:
+terraform state list:
+Lists all resources in the Terraform state.
+Example: terraform state list
+
+terraform state show:
+Displays the attributes of a specific resource in the Terraform state.
+Example: terraform state show aws_instance.example
+
+terraform state mv:
+Moves a resource instance from one address to another in the Terraform state.
+Useful when you want to rename or reorganize your resources.
+Example: terraform state mv aws_instance.old aws_instance.new
+
+terraform state rm:
+Removes a resource instance from the Terraform state.
+Use with caution, as it doesn't destroy the actual resource; it just removes it from Terraform's management.
+Example: terraform state rm aws_instance.example
+
+terraform state pull:
+Fetches the current state from the backend and saves it locally.
+Useful when you want to see the latest state without applying changes.
+Example: terraform state pull
+
+terraform state push:
+Updates the remote state with the local state.
+Useful when working with remote backends like Terraform Cloud.
+Example: terraform state push
+
+terraform state refresh:
+Updates the Terraform state file with the real-world infrastructure.
+Fetches the latest state from the provider and updates the local state file.
+Example: terraform state refresh
+
+terraform state import:
+Associates an existing resource with a Terraform resource in the state.
+Allows you to import pre-existing infrastructure into Terraform management.
+Example: terraform state import aws_instance.example i-0123456789abcdef0
+
+terraform destroy:
+This command is used to destroy the infrastructure defined in your Terraform configuration.
+It reads the current state and figures out what resources need to be deleted to bring the infrastructure to an empty state.
+
+terraform validate:
+This command is used to validate the configuration files in the current directory.
+It checks the syntax of the files and ensures that all required providers are configured.
+
+terraform import:
+This command is used to import existing infrastructure into Terraform.
+It associates a Terraform resource with an existing resource in the real world, allowing Terraform to manage it.
+
+terraform refresh:
+This command is used to update the state file with the real-world infrastructure.
+It reads the current state of the infrastructure and updates the state file with the latest information about resources.
+These commands are fundamental to the Terraform workflow, allowing you to initialize, plan, apply, and manage infrastructure as code.
+
+What is terraform variable
+In Terraform, variables are a way to parameterize your infrastructure configuration. They allow you to define values that can be used in your Terraform configurations,
+making them more flexible and reusable. Variables are typically used to abstract away values that may change between environments, deployments, or over time.
+
+
+How to use terraform outputs
+Terraform outputs allow you to expose information from your infrastructure configuration, making it accessible after the deployment. 
+Outputs are useful for providing information about resources created by Terraform, such as IP addresses, URLs, or any other relevant data. 
+Here's how you can use Terraform outputs:
+output "instance_id" {
+  value = aws_instance.example.id
+}
+
+output "public_ip" {
+  value = aws_instance.example.public_ip
+}
 
