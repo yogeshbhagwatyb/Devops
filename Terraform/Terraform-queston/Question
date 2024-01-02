@@ -140,3 +140,197 @@ output "public_ip" {
 What is terraform.tfvars file?
 Variables.tf is for the declaration of variables, name, type, description, default values and additional meta data.
 *.tfvars is for giving the actual variable values during execution. It allows you to customize the specific execution
+
+
+How to reference attribute of one resource in another resource block
+In Terraform, when you declare resources, you can use the outputs of one resource as input for another. Here's a more detailed explanation with a focus on AWS resources:
+# Resource 1: AWS S3 Bucket
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-unique-bucket-name"
+  acl    = "private"
+}
+
+# Resource 2: AWS DynamoDB Table
+resource "aws_dynamodb_table" "my_table" {
+  name           = "my-dynamodb-table"
+  billing_mode   = "PAY_PER_REQUEST"
+  read_capacity  = 5
+  write_capacity = 5
+
+  attribute {
+    name = "ID"
+    type = "S"
+  }
+
+  # Reference the S3 bucket's ARN from the first resource
+  tags = {
+    BucketName = aws_s3_bucket.my_bucket.arn
+  }
+}
+
+In this example:
+
+Resource 1 (aws_s3_bucket): Declares an AWS S3 bucket named "my-unique-bucket-name".
+
+Resource 2 (aws_dynamodb_table): Declares an AWS DynamoDB table named "my-dynamodb-table". This resource includes a tag where the BucketName is set to 
+the ARN (Amazon Resource Name) of the S3 bucket declared in Resource 1.
+The syntax aws_s3_bucket.my_bucket.arn references the arn attribute of the aws_s3_bucket resource with the name my_bucket. 
+This is how you access the attributes of a resource in Terraform.
+By referencing the output of the first resource (aws_s3_bucket.my_bucket.arn) in the second resource (aws_dynamodb_table.my_table), 
+you're essentially telling Terraform to create a dependency between the two resources. Terraform will ensure that the S3 bucket is created before the DynamoDB table
+because the DynamoDB table is using information from the S3 bucket.\
+This is a basic example, and the actual attributes you reference will depend on the resources you're working with. 
+Always refer to the official documentation for the specific resources and Terraform itself for accurate attribute names and usage.
+
+ How to configure s3 backend to store state
+First create S3 bucket
+# Resource 1: AWS S3 Bucket
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "your-unique-s3-bucket-name"
+  acl    = "private"
+}
+
+Then 
+
+# backend.tf
+terraform {
+  backend "s3" {
+    bucket         = "your-unique-s3-bucket-name"
+    key            = "path/to/terraform.tfstate"  # Optional: Define a specific path for your state file
+    region         = "your-aws-region"
+    encrypt        = true
+    dynamodb_table = "your-lock-table-name"  # Optional: Use DynamoDB for state locking
+  }
+}
+bucket: The name of the S3 bucket where the Terraform state file will be stored.
+key: The path within the bucket to store the state file. This is optional but recommended for better organization.
+region: The AWS region where the S3 bucket is located.
+encrypt: Set to true to enable server-side encryption of the state file.
+dynamodb_table: (Optional) If you want to use DynamoDB for state locking, provide the name of the DynamoDB table.
+
+What are the advantages of S3 Backend?
+Remote State Storage:
+The state file contains information about the current state of your infrastructure. By storing it in an S3 bucket, you centralize the management of this critical information. 
+This is particularly useful in collaborative environments or when managing infrastructure across multiple machines.
+Concurrent State Access:
+Storing the state file remotely allows multiple team members to access and modify the state concurrently. This is important when working on larger projects
+with multiple contributors.
+Consistency and Coordination:
+An S3 backend allows Terraform to use a remote storage system for the state file. This helps ensure that all team members are working with the same state, 
+promoting consistency and coordination when making changes to the infrastructure.
+State Locking:
+The S3 backend supports state locking using DynamoDB tables. This prevents multiple users or processes from modifying the state at the same time, 
+reducing the risk of conflicts and potential data corruption.
+Secure Storage:
+Amazon S3 provides secure and durable object storage. Using S3 as a backend ensures that your state file is stored securely and is resilient to hardware failures. 
+Additionally, you can enable server-side encryption to further enhance data security.
+Audit Trail:
+S3 provides versioning, which allows you to track changes to the state file over time. This can be useful for auditing and understanding
+the history of your infrastructure changes.
+Ease of Integration with AWS Services:
+If your infrastructure is primarily hosted on AWS, using an S3 backend provides seamless integration with other AWS services. You can easily manage 
+access control, logging, and monitoring for your S3 bucket.
+Remote Backend Configuration:
+The backend configuration is stored separately from your main Terraform configurations. This makes it easier to manage sensitive information like 
+access keys, secret keys, and bucket names without exposing them in your main configuration files.
+Scalability:
+S3 is designed for scalability and can handle large amounts of data. This makes it suitable for storing and retrieving Terraform state files, even in 
+environments with extensive infrastructure.
+Ease of Collaboration:
+Storing the state file in an S3 bucket makes it easy to share the state among team members. This is especially beneficial in scenarios where multiple 
+individuals or teams are working on different parts of the infrastructure.
+
+
+Explain what is a Provider Plugin?
+provider plugin refers to a specific type of plugin responsible for interacting with a particular infrastructure or service provider. 
+Terraform providers are responsible for understanding API interactions and resource lifecycles for a specific platform, enabling Terraform to manage resources on that platform.
+
+
+How to import existing resources into a state file
+Create Terraform Configuration:
+Create a new or modify an existing Terraform configuration file (usually with a .tf extension) to include the resource you 
+want to import. Specify the resource type and necessary configuration settings. 
+This configuration will act as a placeholder for the imported resource.
+# main.tf
+resource "aws_instance" "example" {
+  # Give all the neccessary details as deatils needed when need to create new instance
+}
+#### Declared provider if it is not same ###
+terraform init
+terraform import <resource_type>.<resource_name> <existing_resource_id>
+terraform import aws_instance.example <Give id of instance>
+
+Explain different types of provisioners used in Terraform
+Provisioners in Terraform are used to execute scripts or configuration management tools on a local machine or remote resources during the deployment 
+or destruction of infrastructure. Provisioners enable you to perform tasks like installing software, configuring services, or executing custom scripts 
+on instances after they are created.
+Local Exec Provisioner
+Executes a command on the machine running Terraform (local machine).
+The local-exec provisioner in Terraform is used to execute commands on the machine running Terraform (local machine) during the provisioning or destruction of infrastructure. 
+It is often used for local tasks that do not require interaction with the remote resources being managed by Terraform.
+Let's consider an example where you want to create a file with some content on your local machine after creating an AWS EC2 instance:
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "local-exec" {
+    command = "echo 'Hello, Terraform!' > output.txt"
+  }
+}
+The aws_instance resource defines an EC2 instance.
+The local-exec provisioner is attached to the aws_instance resource.
+The command parameter specifies the command to execute. In this case, it's a simple shell command that echoes
+the text "Hello, Terraform!" into a file named output.txt on the local machine.
+
+Remote Exec Provisioner:
+Use Case: Executes a command on a remote resource, typically after the resource is created.
+The remote-exec provisioner in Terraform is used to execute commands on a remote resource (e.g., an instance) after it has been created. 
+It enables you to perform additional configuration, setup, or customization on the remote machine as part of the Terraform provisioning process. 
+The remote-exec provisioner is commonly used for tasks such as installing software, configuring services, or running scripts on instances.
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get install -y nginx",
+    ]
+  }
+}
+
+2 nd Example
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "remote-exec" {
+    script = "path/to/configure_instance.sh"
+  }
+}
+In this example, the remote-exec provisioner executes a script (configure_instance.sh) located on the local machine. 
+The script contains the commands to be executed on the remote instance.
+
+File Provisioner
+Use Case: Copies files or directories from the local machine to a remote resource.
+The file provisioner in Terraform is used to copy files or directories from the local machine (where Terraform is executed) to a remote resource 
+after it has been created. This provisioner is helpful when you need to transfer configuration files, scripts, or other assets to a newly provisioned instance or resource.
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "file" {
+    source      = "local/path/to/script.sh"
+    destination = "/remote/path/script.sh"
+  }
+}
+
+
+
+Explain modules?
+With Terraform, you can put your code inside of a Terraform module and reuse that module in multiple places throughout your code. 
+Instead of having the same code copied and pasted in the staging and production environments, you’ll be able to have both environments reuse code from the same module:
+
+
+
+
