@@ -137,3 +137,6 @@ output "public_ip" {
   value = aws_instance.example.public_ip
 }
 
+What is terraform.tfvars file?
+Variables.tf is for the declaration of variables, name, type, description, default values and additional meta data.
+*.tfvars is for giving the actual variable values during execution. It allows you to customize the specific execution
