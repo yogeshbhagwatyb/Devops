@@ -1,0 +1,6 @@
+What is Container?
+A container is a lightweight, standalone, executable package that includes everything which needed to run software, including the code, 
+runtime, libraries, and system tools. Containers provide a consistent and portable environment across different computing environments, making it easier to develop, deploy, 
+and scale applications.
+Containers can run on any system that supports containerization, making them highly portable. This portability is achieved through the use of container runtimes and orchestration tools.
+Containers share the host operating system's kernel, which makes them more lightweight and efficient compared to traditional virtual machines. They start up quickly and consume fewer resources.
