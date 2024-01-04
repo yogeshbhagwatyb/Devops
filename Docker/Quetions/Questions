@@ -4,3 +4,37 @@ runtime, libraries, and system tools. Containers provide a consistent and portab
 and scale applications.
 Containers can run on any system that supports containerization, making them highly portable. This portability is achieved through the use of container runtimes and orchestration tools.
 Containers share the host operating system's kernel, which makes them more lightweight and efficient compared to traditional virtual machines. They start up quickly and consume fewer resources.
+
+What is CMD?
+CMD instruction is used in a Dockerfile to specify the default command and arguments to execute for the container when it starts. 
+Sample - CMD ["executable", "param1", "param2"]
+
+FROM ubuntu
+CMD ["echo", "Hello, World!"] > In this example, the default command for the container is set to echo "Hello, World!". You can override this command when running the container
+docker run myimage echo "Goodbye, World!"
+This would output "Goodbye, World!" instead of the default message
+
+What is Entrypoint?
+In a Dockerfile, the ENTRYPOINT instruction is used to specify the command that will be run when a container is started from the built image
+Here is the basic syntax of the ENTRYPOINT instruction in a Dockerfile > ENTRYPOINT ["executable", "param1", "param2", ...]
+
+Here's an example: FROM ubuntu
+ENTRYPOINT ["echo", "Hello, World!"]
+In this example, if you build an image from this Dockerfile and run a container, it will automatically execute the echo "Hello, World!" command.
+
+Difference between CMD and ENTRYPOINT?
+In a Dockerfile, both CMD and ENTRYPOINT are instructions used to define the default command that will be executed when a Docker container starts. 
+However, they serve slightly different purposes and can be used together.
+CMD Instruction:
+The CMD instruction specifies the default command and parameters for the container.
+You can provide the command and its arguments directly in the CMD instruction.
+If the Dockerfile includes multiple CMD instructions, only the last one is effective.
+The CMD instruction can be overridden at runtime by providing a command when running the container.
+ENTRYPOINT Instruction:
+The ENTRYPOINT instruction also specifies the default command and parameters for the container.
+However, it is more rigid compared to CMD. The ENTRYPOINT command and its parameters are not easily overridden at runtime; instead, additional 
+command-line arguments are appended to the ENTRYPOINT command.
+If a Dockerfile has both CMD and ENTRYPOINT, the CMD arguments will be passed as arguments to the ENTRYPOINT.
+ENTRYPOINT is often used when you want to define a fixed executable and provide flexibility by allowing additional arguments to be passed.
+In summary, while both CMD and ENTRYPOINT set the default command for a container, CMD is more easily overridden at runtime, and ENTRYPOINT is 
+useful when you want to define a fixed command with some flexibility for additional arguments.
