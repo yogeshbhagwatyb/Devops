@@ -39,3 +39,4 @@ ENTRYPOINT is often used when you want to define a fixed executable and provide 
 In summary, while both CMD and ENTRYPOINT set the default command for a container, CMD is more easily overridden at runtime, and ENTRYPOINT is 
 useful when you want to define a fixed command with some flexibility for additional arguments.
 
+A Dockerfile is a text document that contains a set of instructions for building a Docker image.
