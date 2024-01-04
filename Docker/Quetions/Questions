@@ -40,3 +40,68 @@ In summary, while both CMD and ENTRYPOINT set the default command for a containe
 useful when you want to define a fixed command with some flexibility for additional arguments.
 
 A Dockerfile is a text document that contains a set of instructions for building a Docker image.
+Base Image: FROM ubuntu:20.04
+The Dockerfile typically starts with a FROM instruction that specifies the base image on which the new image will be built. 
+The base image provides the foundation for your application, and it can include an operating system, runtime, libraries, and other dependencies.
+
+Instructions: RUN apt-get update && apt-get install -y python3
+COPY . /app
+WORKDIR /app
+EXPOSE 8080
+Dockerfiles consist of a series of instructions, each representing a step in the image-building process. Common instructions include RUN (execute commands), 
+COPY (copy files from the host to the image), WORKDIR (set the working directory), EXPOSE (declare ports to be exposed), and more.
+
+Environment Variables: ENV APP_HOME /app
+You can set environment variables within the Dockerfile using the ENV instruction. This allows you to configure aspects of the image or the application running
+inside the container.
+
+Executing Commands:
+The RUN instruction is used to execute commands during the image-building process. This is where you install dependencies, configure settings, and perform other tasks.
+
+Working Directory: WORKDIR /app
+The WORKDIR instruction sets the working directory for subsequent instructions in the Dockerfile. It affects the following RUN, CMD, ENTRYPOINT, COPY, and ADD instructions.
+
+Copying Files: COPY . /app
+The COPY instruction is used to copy files or directories from the host machine to the image. This is commonly used to include application code and configuration files.
+
+Expose Ports: EXPOSE 8080
+The EXPOSE instruction informs Docker that the container will listen on specified network ports at runtime. It does not actually publish the ports; it is used as metadata.
+
+Container Execution Defaults: CMD ["python3", "app.py"]
+The CMD instruction specifies the default command to run when the container starts. It can be overridden at runtime. If the Dockerfile includes multiple CMD instructions, 
+only the last one is effective.
+
+Entrypoint: ENTRYPOINT ["python3"]
+CMD ["app.py"]
+The ENTRYPOINT instruction configures a container to run as an executable. It is often used with CMD to set a default command with optional arguments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
