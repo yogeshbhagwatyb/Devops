@@ -75,6 +75,46 @@ Entrypoint: ENTRYPOINT ["python3"]
 CMD ["app.py"]
 The ENTRYPOINT instruction configures a container to run as an executable. It is often used with CMD to set a default command with optional arguments.
 
+How to delete unused Docker Volumes?
+List Unused Volumes:
+You can use the docker volume ls command with the --filter option to list only the volumes that are not currently in use by any container.The filter criteria can be set 
+to "dangling=true."
+docker volume ls --filter dangling=true
+This command will display a list of unused volumes.
+Remove Unused Volumes:
+Once you've identified the unused volumes, you can use the docker volume rm command to remove them. Replace volume_name with the actual name or ID of the volume you 
+want to remove.
+docker volume rm volume_name
+If you want to remove all unused volumes in one command, you can use a combination of docker volume ls and docker volume rm:
+docker volume rm $(docker volume ls --filter dangling=true -q)
+
+What is Overlay network in Docker?
+An overlay network in Docker is a network driver that allows multiple Docker daemons running on different nodes to communicate with each other. It enables communication
+between containers running on different hosts in a Docker Swarm. Docker Swarm is Docker's native clustering and orchestration solution for managing a swarm of Docker nodes.
+Multi-Host Communication:
+Overlay networks enable communication between containers across multiple Docker hosts (nodes) in a Swarm.
+Automatic Encryption:
+Traffic on overlay networks is automatically encrypted, providing secure communication between containers on different nodes.
+Example Usage:
+Create an Overlay Network:
+docker network create --driver overlay my-overlay-network
+Deploy a Service on the Overlay Network:
+docker service create --name my-web-app --network my-overlay-network -p 80:80 my-web-image
+Scale the Service:
+docker service scale my-web-app=3
+Communication Between Nodes:
+Containers within the my-overlay-network can communicate with each other, regardless of the node they are running on.
+Overlay networks provide a powerful mechanism for orchestrating containerized applications in a distributed environment, allowing for seamless communication and scaling 
+across multiple Docker Swarm nodes. They are particularly useful in microservices architectures where services need to communicate with each other while being deployed 
+across different hosts.
+
+
+
+
+
+
+
+
 
 
 
