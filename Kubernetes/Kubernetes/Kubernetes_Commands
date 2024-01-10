@@ -12,6 +12,68 @@ Rollbacks: If a new version of the application has issues, you can easily roll b
 Desired State Configuration: Deployments allow you to specify the desired state of your application, and Kubernetes takes care of maintaining that state. If a pod goes 
 down or a node fails, Kubernetes automatically works to bring the system back to the desired state.
 
+mydeployment.yml
+apiVersion: apps/v1 >>>> 
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+apiVersion and kind: These fields specify the API version and the type of resource being created. In this case, it's a Deployment resource in the "apps/v1" API version.
+metadata: This section contains metadata for the deployment, such as the name of the deployment. In this example, the deployment is named "webapp-deployment."
+spec: This is where you define the desired state of the deployment.
+replicas: Specifies the desired number of replicas (pods) for the application. In this case, it's set to 3.
+selector: Defines how the deployment identifies which pods it manages. The matchLabels field specifies that it should manage pods with the label "app: webapp."
+template: Describes the pod template used for the deployment.
+metadata: Labels to be applied to the pods. In this example, the pods will have the label "app: webapp."
+spec: Specifies the pod's specification.
+containers: Defines the containers within the pod. In this case, there's one container named "webapp-container" using the Nginx image. The container exposes port 80.
+Now, if you apply this YAML file using the kubectl apply -f filename.yaml command, Kubernetes will create a deployment named "webapp-deployment" with three replicas of 
+the Nginx-based pod. The deployment ensures that the specified number of replicas is always running and provides features like rolling updates and rollbacks.
+
+In Kubernetes, a DaemonSet is a resource object that ensures that a copy of a specific pod runs on each node within a cluster. Unlike Deployments, which are designed to 
+ensure a specific number of replicas are running across the entire cluster, DaemonSets are used for running a single instance of a pod on every node.
+
+Difference between Deployment and Daemonset
+While both DaemonSets and Deployments in Kubernetes are used to manage the deployment and scaling of pods, they have different use cases and behaviors. Here are the key 
+differences between DaemonSets and Deployments:
+Pod Placement:
+DaemonSet: Ensures that a copy of a specific pod runs on every node in the cluster. It's suitable for scenarios where you want to run a pod on each node, such as for 
+node-specific tasks or for deploying infrastructure-related components like monitoring agents or logging agents.
+Deployment: Manages the deployment of pods across the entire cluster, aiming to maintain a desired number of replicas. Pods managed by Deployments are usually distributed
+across nodes based on resource availability and scheduling decisions.
+Scaling:
+DaemonSet: Scales by adding one instance of the pod to each new node that joins the cluster. It does not typically scale the number of replicas on existing nodes.
+Deployment: Scales by adjusting the number of replicas up or down based on the desired state specified in the Deployment configuration. Deployments can scale across
+nodes and can handle rolling updates and rollbacks.
+Updates and Rollbacks:
+DaemonSet: Does not handle rolling updates in the same way Deployments do. DaemonSets are often used for infrastructure components that are less likely to require 
+frequent updates.
+Deployment: Supports rolling updates, allowing you to update the application to a new version without downtime. If the update fails, you can easily roll back to a 
+previous version using the deployment's revision history.
+Node Affinity:
+DaemonSet: Can be configured with node affinity rules to control on which nodes the pods should run, based on node labels.
+Deployment: Uses node affinity and anti-affinity to influence the scheduling of pods but may not be as directly focused on running a pod on every node.
+Use Cases:
+DaemonSet: Suited for tasks or services that need to run on each node, such as monitoring agents, logging agents, or node-specific tasks.
+Deployment: Suited for deploying and managing application workloads that need to scale across the entire cluster.
+In summary, DaemonSets are designed for scenarios where you want a pod to run on every node, whereas Deployments are more versatile and suitable for managing the deployment
+and scaling of application workloads across the cluster. The choice between DaemonSets and Deployments depends on the specific requirements of your application and 
+infrastructure components.
+
 
 
 1. Cluster Information:
