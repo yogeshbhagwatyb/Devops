@@ -167,3 +167,61 @@ Explanation: Applies the configuration defined in deployment.yaml to create or u
 Command: kubectl delete [resource-type] [resource-name]
 Example: kubectl delete pod mypod
 Explanation: Deletes the pod named mypod. Replace [resource-type] with the resource type you want to delete.
+
+Display cluster information:
+kubectl cluster-info
+
+List all nodes in the cluster:
+kubectl get nodes
+
+List all pods in the default namespace:
+kubectl get pods
+kubectl get pods -n <namespace>
+kubectl describe pod <pod-name>
+
+List all deployments:
+kubectl get deployments
+kubectl describe deployment <deployment-name>
+
+List all services:
+kubectl get services
+kubectl describe service <service-name>
+
+ConfigMaps:
+kubectl get configmaps
+kubectl describe configmap <configmap-name>
+
+List all secrets:
+kubectl get secrets
+
+Describe a secret:
+kubectl describe secret <secret-name>
+
+Stream logs from a pod:
+kubectl logs -f <pod-name>
+
+Exec into a Pod:
+kubectl exec -it <pod-name> -- /bin/bash
+
+Scale the number of replicas in a deployment:
+kubectl scale deployment <deployment-name> --replicas=<desired-replica-count>
+
+Delete a resource:
+kubectl delete <resource-type> <resource-name>
+
+Delete all resources in a namespace:
+kubectl delete --all <resource-type> -n <namespace>
+
+Apply a configuration from a YAML file:
+kubectl apply -f <file.yaml>
+
+Forward a local port to a pod:
+kubectl port-forward <pod-name> <local-port>:<pod-port>
+
+Perform a rolling update for a deployment:
+kubectl set image deployment/<deployment-name> <container-name>=<new-image>
+
+Display additional details in a wide format:
+kubectl get pods -o wide
+
+
