@@ -44,6 +44,7 @@ containers: Defines the containers within the pod. In this case, there's one con
 Now, if you apply this YAML file using the kubectl apply -f filename.yaml command, Kubernetes will create a deployment named "webapp-deployment" with three replicas of 
 the Nginx-based pod. The deployment ensures that the specified number of replicas is always running and provides features like rolling updates and rollbacks.
 
+DaemonSets
 In Kubernetes, a DaemonSet is a resource object that ensures that a copy of a specific pod runs on each node within a cluster. Unlike Deployments, which are designed to 
 ensure a specific number of replicas are running across the entire cluster, DaemonSets are used for running a single instance of a pod on every node.
 
