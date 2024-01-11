@@ -1,1 +1,33 @@
+Explain what is AWS EC2?
+Amazon Elastic Compute Cloud (EC2) is a web service provided by Amazon Web Services (AWS) that allows users to rent virtual servers, known as instances,
+in the cloud. AWS EC2 provides scalable compute capacity, allowing users to quickly scale up or down based on their computing needs. It's a fundamental 
+building block of many cloud-based applications and services.
+Key features of AWS EC2 include:
+Virtual Servers (Instances):
+Users can launch virtual servers, known as instances, with varying compute capacity based on their requirements. Instances can run different operating 
+systems, including popular ones like Linux and Windows.
+Instance Types:
+EC2 offers a variety of instance types optimized for different use cases, such as compute-optimized, memory-optimized, storage-optimized, and GPU instances.
+Users can choose the instance type that best suits their application's needs.
+Scalability:
+Users can easily scale their compute capacity up or down by launching or terminating instances. This allows for flexibility in handling changes in workload or
+demand.
+Pay-as-You-Go Pricing:
+EC2 follows a pay-as-you-go pricing model, meaning users are billed only for the compute capacity they consume. There are various pricing options, including On-Demand
+Instances, Reserved Instances, and Spot Instances.
+Elastic Load Balancing:
+EC2 instances can be used in conjunction with Elastic Load Balancing (ELB) to distribute incoming traffic across multiple instances, ensuring high availability and fault
+tolerance.
+AMI (Amazon Machine Image):
+Users can create custom virtual machine images, called Amazon Machine Images (AMIs), which include pre-configured software and settings. AMIs can be used to launch instances
+with a consistent setup.
+Security Groups and Networking:
+EC2 instances are launched within a Virtual Private Cloud (VPC), and users can configure security groups and network settings to control inbound and outbound traffic to instances.
+Elastic Block Store (EBS):
+EC2 instances can be attached to Elastic Block Store volumes, providing scalable and high-performance block storage that persists independently from the life of the instance.
+Integration with AWS Services:
+EC2 instances can seamlessly integrate with other AWS services, such as Amazon S3 for storage, AWS Lambda for serverless computing, and Amazon RDS for managed relational databases.
+Auto Scaling:
+AWS Auto Scaling allows users to automatically adjust the number of EC2 instances based on defined policies. This ensures that the application can handle varying levels of traffic and demand.
+AWS EC2 is a foundational service that enables users to run virtual servers in the cloud, providing flexibility, scalability, and a wide range of options for different computing needs.
 
