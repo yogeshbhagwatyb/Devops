@@ -1,0 +1,185 @@
+1. What is AWS Global Infrastructure?
+2. What is AWS Region?
+3. What is AWS Availability Zone?
+4. Explain what is AWS EC2?
+5. What is AWS Free Tier?
+6. What is AWS Pricing Calculator?
+7. How to create AWS EC2 instance?
+8. What is AMI – Amazon Machine Image?
+9. What are the AWS Instance Types available and how to choose Instance Type?
+10. What is AWS EBS Volume?
+11. What is AWS Key Pair?
+12. How to change EC2 Instance Type?
+13. How to explore AWS Billing Dashboard?
+14. What is Security Group in AWS?
+15. Why Security Groups are Stateful?
+16. What is AWS Lambda?
+17. How to Configure CloudWatch Events?
+18. What is CloudWatch Logs Group?
+19. How to setup S3 LifeCycle Rules?
+20. How to enable S3 Versioning?
+12/1/21, 4:22 PM Interview Questions - Devops
+https://devopsrealtime.com/interview-questions/ 3/19
+21. What is SNS?
+22. How to setup Cloudwatch Alarms?
+23. How to monitor AWS resources using Cloud Watch Metrics?
+24. How to create IAM user?
+25. How to see list of S3 Object versions?
+26. How to revert the changes in S3?
+27. What are the S3 Versioning disadvantages?
+28. Is it possible to enable versioning only for some objects in S3 bucket?
+29. How to setup LifeCycle rules only for some objects in S3 Bucket?
+30. What are the Cloud Watch Alarm states?
+31. What is S3?
+32. What is S3 Object URL?
+33. S3 Storage Classes?
+34. Explain S3 Advantages?
+35. How to setup S3 LifeCycle Rules?
+36. How to enable S3 Versioning?
+37. What is CloudHealth?
+38. What is SNS?
+39. How to setup Cloudwatch Alarms?
+40. How to monitor AWS resources using Cloud Watch Metrics?
+41. How to create IAM user?
+42. How to see list of S3 Object versions?
+43. How to revert the changes in S3?
+44. What are the S3 Versioning disadvantages?
+45. Is it possible to enable versioning only for some objects in S3 bucket?
+46. How to setup LifeCycle rules only for some objects in S3 Bucket?
+47. What are the Cloud Watch Alarm states?
+48. What is IAM Role?
+49. What is IAM policy?
+50. What is IAM user?
+51. What is IAM group?
+52. Difference between IAM role and IAM user?
+53. How to create custom IAM policy?
+54. What is Bucket Policy and how to write custom Bucket Policy?
+55. What is AWS CLI?
+56. How to install AWS CLI?
+57. How to write IAM custom policy?
+58. What are different IP Classes?
+59. What is CIDR Notation?
+60. What is Internet Gateway?
+61. What is Local Gateway?
+62. What is Default Gateway?
+63. What is Network id?
+12/1/21, 4:22 PM Interview Questions - Devops
+https://devopsrealtime.com/interview-questions/ 4/19
+64. What is Public Subnet?
+65. What is Private Subnet?
+66. What is Public IP?
+67. What is Private IP?
+68. How to create VPC?
+69. What is Route Table? How to create Route Table?
+70. What is Local and Internet Gateway?
+71. What is subnet?
+72. Difference between VPC CIDR and Subnet CIDR?
+73. Difference between default VPC vs. Custom VPC?
+74. What is NAT Gateway?
+75. What is Bastion Host?
+76. What is Load Balancer?
+77. What is Auto Scaling?
+78. How to integrate Auto Scaling and Load Balancer?
+79. What is Launch Configuration?
+80. How to setup ASG?
+81. How to integrate ASG with ELB?
+82. How to setup ELB health check settings?
+83. What are Min, Max and Des values in ASG?
+84. How to add ASG scaling policies?
+85. What is Load balancer Endpoint?
+86. How to configure userdata and what are the advantages of userdata?
+87. How to troubleshoot cloud-init issues?
+88. Discuss on ASG, ELB advantages?
+89. What is Multi AZ RDS deployment?
+90. What are the 3-tier Architecture best practices?
+91. Difference between Compute auto scaling vs. storage auto scaling?
+92. How to setup CDN using Cloud Front?
+93. Difference between Internal Vs. Public Load Balancer?
+94. What is 3-Tier Architecture?
+95. What is RDS?
+96. How to create RDS instance?
+97. How to connect to the RDS instance?
+98. How to add JDBC connection string in application?
+99. Can you tell me a few major tasks/activities done in AWS?
+100. How will you login to the private subnet instances?
+101. Differences between network ACL & Security groups?
+102. How will you monitor the ec2 instances?
+103. Can you explain IAM Role based access & Assume Role based access?
+104. Can you Modify the policies of the role attached to the EC2?
+105. How will you encrypt the root EBS volume?
+106. Can I delete the custom AMI once the Instance Launched using that AMI?
+12/1/21, 4:22 PM Interview Questions - Devops
+https://devopsrealtime.com/interview-questions/ 5/19
+107. What is Latency Based routing in route53?
+108. What troubleshooting activities have been done in AWS so far?
+109. User is unable to upload 10GB file to an instance? What could be the issue.
+110. What is your job role in AWS?
+111. Can you stop the EC2 instance which is in the Auto Scaling group?
+112. Can you explain the difference between Application LB & Classic LB?
+113. Can we create A record for the ELB?
+114. Difference between CNAME vs. Alias Record?
+115. How many Security Groups can create to a  single EC2 instance?
+116. EC2 server experiencing slow internet connection how to fix?
+117. How to add multiple ‘InternetGateway’ to the VPC to increase the network speed?
+118. Can we create multiple subnets in VPC?
+119. How will you login to the Windows host hosted on a private subnet?
+120. Can I have Private subnet instances accessing the internet through Internet gateway?
+121. What are the EC2 provisioning tools used to launch the instances?
+122. How will you monitor Memory utilization from Cloud watch?
+123. How will you modify Launch Configuration when the Instances are already running in
+Auto Scaling?
+124. Have you ever done database backup & restore?
+125. How will you automate the EC2 snapshots?
+126. What are the disadvantages of NAT Gateway?
+127. How will you identify if the subnet is public or private?
+128. How will you resize the EC2 root EBS root volume?
+129. Clients receiving  HTTP: 503 service unavailable or HTTP: 504 gateway timeout error
+message, How to fix?
+130. EC2 instance is no longer responding, how will you fix it?
+131. EC2 server throwing out of memory errors, how will you fix these issues?
+132. Do you know what a system manager in AWS?
+133. What are Cloud watch Events?
+134. How will you monitor disk and file system usage using Cloud Watch?
+135. Can I authenticate the EC2 without using Keypair?
+136. Can you explain the 3-tier architecture with high availability in each layer?
+137. Can I create ELB for the bastion hosts?
+138. What is VPN in AWS?
+139. Have you ever logged a case with Amazon?
+140. Where will you store ec2 snapshots?
+141. Have you ever configured the cloud watch metric?
+142. What is Life Cycle Hook in Auto Scaling?
+143. Instance is showing 1/2 state, how will you troubleshoot the issues.
+144. Have you ever worked on Capacity Planning?
+145. Explain to me Disaster Recovery Planning for Region Failures in AWS?
+146. Difference between ELB and EFS
+147. What is VPC peering ?
+12/1/21, 4:22 PM Interview Questions - Devops
+https://devopsrealtime.com/interview-questions/ 6/19
+148. How to restrict particular source IP in AWS?
+149. How to create Cross IAM Role in AWS?
+150. What is Transit Gateway?
+151. What is AWS Lambda?
+152. What is Amazon AMI?
+153. Difference between EBS vs. EFS vs. S3?
+154. Difference between Security Group vs. Network ACL?
+155. How will you monitor VPC network flow?
+156. How to write AWS custom IAM policy?
+157. Explain VPN in AWS?
+158. Difference between Cloud Trail Vs. Cloud Watch?
+159. Explain AWS Auto Scaling Policies?
+160. What is CloudFront? Explain different Origins in CloudFront?
+161. Difference between Horizontal Scaling vs. Vertical Scaling?
+162. How to recovery AWS keypair to connect to the EC2 instance?
+163. What is Connection Draining?
+164. What is S3 Glacier storage class?
+165. What is DynamoDB?
+166. Explain steps in migrating on-premises servers to AWS cloud?
+167. How to add additional Private IP for EC2 instance?
+168. Explain what is 3-tier Architecture?
+169. What is Placement Group in AWS?
+170. What is the difference between Internet Gateway Vs. NAT Gateway?
+171. What are 2/2 checks in AWS EC2?
+172. Explain Route53 policies?
+173. What is Cross-Zone Load Balancing in AWS?
+174. What is the difference between Multi-AZ deployment and Read Replicas in RDS?
+175. How to enable Life Cycle rules to S3 Bucket folders?
