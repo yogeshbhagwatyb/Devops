@@ -18,8 +18,6 @@
 18. What is CloudWatch Logs Group?
 19. How to setup S3 LifeCycle Rules?
 20. How to enable S3 Versioning?
-12/1/21, 4:22 PM Interview Questions - Devops
-https://devopsrealtime.com/interview-questions/ 3/19
 21. What is SNS?
 22. How to setup Cloudwatch Alarms?
 23. How to monitor AWS resources using Cloud Watch Metrics?
@@ -63,8 +61,6 @@ https://devopsrealtime.com/interview-questions/ 3/19
 61. What is Local Gateway?
 62. What is Default Gateway?
 63. What is Network id?
-12/1/21, 4:22 PM Interview Questions - Devops
-https://devopsrealtime.com/interview-questions/ 4/19
 64. What is Public Subnet?
 65. What is Private Subnet?
 66. What is Public IP?
@@ -153,8 +149,6 @@ message, How to fix?
 145. Explain to me Disaster Recovery Planning for Region Failures in AWS?
 146. Difference between ELB and EFS
 147. What is VPC peering ?
-12/1/21, 4:22 PM Interview Questions - Devops
-https://devopsrealtime.com/interview-questions/ 6/19
 148. How to restrict particular source IP in AWS?
 149. How to create Cross IAM Role in AWS?
 150. What is Transit Gateway?
