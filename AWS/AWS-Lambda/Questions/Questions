@@ -1637,7 +1637,48 @@ IP Hash is commonly used in scenarios where maintaining session persistence is c
 However, administrators need to carefully consider the potential limitations in terms of scalability and load balancing across the server pool. 
 In some cases, alternate load balancing algorithms may be more suitable for achieving a balanced distribution of traffic.
 
-
+Least Response Time Routing:
+Least Response Time routing is a load balancing algorithm that directs incoming traffic to the server with the lowest response time. The goal is
+to optimize overall response times by dynamically monitoring the performance of each server in the server pool. New requests are sent to the 
+server that is currently responding the fastest, ensuring efficient utilization of resources and minimizing user wait times.
+How Least Response Time Works:
+Monitoring Response Times: The load balancer continuously monitors the response times of each server in the server pool. Response time is the 
+time it takes for a server to process a request and send back a response to the client.
+Server Selection: When a new request arrives, the load balancer selects the server with the lowest current response time to handle the request. 
+This decision is dynamic and based on the most recent performance metrics.
+Optimizing Overall Response Times: By consistently directing traffic to the server with the lowest response time, the algorithm aims to optimize
+the overall responsiveness of the application or service.
+Example:
+Consider a scenario with three servers labeled A, B, and C. The load balancer continuously monitors the response times of each server and 
+dynamically adjusts its routing decisions. Let's look at a few requests:
+Request 1:
+The load balancer evaluates the response times of Servers A, B, and C.
+If Server A currently has the lowest response time, the new request is directed to Server A.
+Subsequent requests may be directed to the server with the lowest response time at the time of each request.
+Request 2:
+After processing Request 1, the load balancer re-evaluates the response times of Servers A, B, and C.
+If Server B now has the lowest response time, the new request is directed to Server B.
+The load balancer dynamically adjusts its routing decisions based on the most recent performance metrics.
+Request 3:
+The load balancer continues to monitor response times and directs the next request to the server with the lowest response time, which may be 
+Server C in this case.
+Request 4:
+The load balancer adjusts its decision for the next request based on the latest response times, directing traffic to the server that is currently
+responding the fastest.
+This process continues, with the load balancer making real-time routing decisions to optimize overall response times.
+Advantages:
+Optimized Performance: Least Response Time aims to direct traffic to the server that can respond the fastest, optimizing overall application or 
+service performance.
+Dynamic Adaptation: The algorithm dynamically adapts to changes in server conditions, adjusting routing decisions based on the most recent 
+response time metrics.
+Limitations:
+Potential for Fluctuations: Response times can fluctuate due to various factors, and the algorithm may introduce some variability in server 
+selection.
+Resource Intensive: Continuous monitoring of response times and dynamic decision-making can be resource-intensive for the load balancer.
+Considerations:
+Least Response Time is effective in scenarios where optimizing response times is a critical requirement. However, administrators should consider
+the potential for response time fluctuations and resource implications when deploying this algorithm. It's also important to test and adjust 
+parameters to strike the right balance between responsiveness and resource efficiency.
 
 
 
