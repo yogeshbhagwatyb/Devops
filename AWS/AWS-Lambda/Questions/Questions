@@ -1683,6 +1683,14 @@ parameters to strike the right balance between responsiveness and resource effic
 
 
 
+What is Auto Scaling? In simple words
+In simple terms, Auto Scaling is like having a smart system that automatically adjusts the number of servers or computing resources your 
+application needs based on the amount of incoming traffic or workload. If more people start using your website or app, Auto Scaling can add more
+servers to handle the increased demand. On the flip side, if the demand decreases, Auto Scaling can reduce the number of servers to save costs. 
+It's a way to make sure your application runs smoothly and efficiently, without manual intervention, even as the popularity or usage of your 
+service goes up and down.
+
+
 
 
 
