@@ -1,0 +1,55 @@
+    1  wget https://vstsagentpackage.azureedge.net/agent/3.232.3/vsts-agent-linux-x64-3.232.3.tar.gz
+    2  ll
+    3  tar zxvf vsts-agent-linux-x64-3.232.3.tar.gz 
+    4  ll
+    5  mkdir myagent && cd myagent
+    6  wget https://vstsagentpackage.azureedge.net/agent/3.232.3/vsts-agent-linux-x64-3.232.3.tar.gz
+    7  ll
+    8  tar zxvf vsts-agent-linux-x64-3.232.3.tar.gz 
+    9  ll
+   10  ./config.sh 
+   11  sudo apt update
+   12  sudo apt install default-jdk
+   13  java -verison
+   14  sudo apt install openjdk-11-jdk
+   15  java -verison
+   16  java
+   17  java --version
+   18  sudo su
+   19  sudo su -
+   20  sudo adduser testuser
+   21  sudo usermod -aG sudo testuser
+   22  cat /etc/passwd
+   23  su testuser
+   24  cat /etc/passwd
+   25  cd ..
+   26  ls
+   27  cd testuser/
+   28  su testuser
+   29  mkdir flask_project
+   30  nano __init__.py
+   31  cat __init__.py 
+   32  sudo apt install nginx
+   33  vim /etc/nginx/sites-enabled/flask_project
+   34  unlink /etc/nginx/sites-enabled/default
+   35  nginx -s reload
+   36  sudo apt-get install gunicorn
+   37  gunicorn -w 3 flask_project:app
+   38  cat flask_project/
+   39  vim __init__.py 
+   40  gunicorn -w 3 flask_project:app
+   41  vim __init__.py 
+   42  gunicorn -w 3 flask_project:app
+   43  vim __init__.py 
+   44  gunicorn -w 3 flask_project:app
+   45  ls
+   46  cp __init__.py flask_project/
+   47  cd flask_project/
+   48  ls
+   49  vim __init__.py 
+   50  lscd ..
+   51  cd ..
+   52  gunicorn -w 3 flask_project:app
+   53  pip3 install flask
+   54  gunicorn -w 3 flask_project:app
+   55  history
