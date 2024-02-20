@@ -19,6 +19,12 @@ df -BG = Show in gigabyte
 du -sh /home/ubuntu = Disk Usage of Summary of specified directory rather than all in Human redable format
 du -h /home/ubuntu = Same as above
 
+To find folders
+find /path/to/search -type d -name "folder_name"
+find /etc -type d -name "sshd" = d directory 
+find / -type f -name "filename.txt"
+find /home/ubuntu -type f -name "1.txt" = f file
+
 How to check cpu usage for a process
 ps aux = To see detail view of process
 top = To see utilization and monitoring
@@ -86,7 +92,76 @@ netstat -putn
  
 netstat -putn | grep :22 = to find particulary :22 connection
 
-Which command is used 
+Password authentication file
+/etc/ssh/sshd_config
+
+Sudoers file to give permission
+/etc/sudoers = user1   ALL=(ALL:ALL) ALL
+
+SSH from another sever
+Server1
+adduser user1 = Create user
+vim /etc/ssh/sshd_config = Yes on Password authentication
+sudo systemctl restart sshd = Reload sshd
+Server2 
+ssh user@Server1publicip
+
+What is Kernal
+What is Components of Linux
+What is swap space
+What is alias
+Environment varibale video
+Ownership video
+
+SCP
+Secure Copy file and directiories between local and remote or two remote system
+scp -i /path/to/private_key.pem /path/to/local/file.txt user@remote_host:/path/to/destination
+scp -i mykey.pem /home/ubuntu/1.txt ubuntu@34.201.69.205:/home/ubuntu = for local to remote and remote to remote with public and private ip
+#####################################################################################################
+Remote to Remote 
+Upload pemfile on server and give read write permissions to user 
+chmod u=rw
+chmod go=
+or chmod u=rw, go=
+scp -i mykey.pem /home/ubuntu/1.txt ubuntu@34.201.69.205:/home/ubuntu
+###########################################################################
+Remote to local
+scp -i key.pem ubuntu@34.229.177.56:/home/ubuntu/2.txt "\c\Users\12816\Desktop\Azure"
+
+To check pacakage installed or not
+dpkg --get-selections | grep package_name = Debian Pacakge Manager
+
+To check number and type of processors used by linux
+cat /proc/cpuinfo
+lscpu
+
+To zip and unzip file
+gzip filename
+gunzip filename
+
+To zip and unzip folders
+In this we have to zip folder by using command tar and then it will craete file and we need to craete zip file from this and final output of file is myfile.tar.gz
+tar cvf file.tar newfolder = Tape ARchive Create an archive Versbose Filename of the archive 
+-c: This option specifies that you want to create an archive.
+-v: This option stands for "verbose" and will display a list of files being archived.
+-f: This option allows you to specify the filename of the archive.
+tar cvf (entername before .tar which you to craete file) (folder name which you want to compressed)
+
+tar xvf file.tar = EXtract
+tar xvf (File which you want unzip)
+############################################################################################
+In this we have to zip folder by using command tar and then it will craete file and we need to craete zip file from this
+But we can do it by single command
+tar -zcvf myfile.tgz myfolder = gZip
+tar -zcvf (entername before .tgz which you to craete file) (folder name which you want to compressed)
+tar -zxvf myfile.tgz myfolder = gZip
+
+
+To see all the environment variables
+env
+printenv
+
+
 
 
 
