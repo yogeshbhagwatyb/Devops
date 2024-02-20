@@ -161,6 +161,27 @@ To see all the environment variables
 env
 printenv
 
+Which command displays memory usage including the ammount of swap space being used
+free -h = Human readable
+
+In short, the lsblk command lists information about block devices (storage devices) attached to the system, including their names, sizes, and relationships, in a hierarchical view.
+lsblk
+lsblk -f
+
+To see about vm
+cat /etc/os-release
+cat /etc/issue
+uname -a
+
+Pacakage management 
+sudo apt-get update = To update the system, 
+sudo apt-get upgrade = To upgrade the system, In upgrade it will delete older version or files and moved to new and we cannot rollback
+/var/cache/apt/archives = Saved all cached files
+sudo apt-get clean = Cleared all cached data of system
+sudo apt-get remove nginx = Delete only software
+sudo apt-get purge nginx = Delete with configuration files
+sudo apt-get dist-upgrade = It perfirm distribution upgrade or updgrade kernal
+
 
 
 
