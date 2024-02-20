@@ -31,40 +31,24 @@ top = To see utilization and monitoring
 PID (Process ID): This column displays a unique identifier assigned to each process by the operating system. Every process running on the system has a PID, which is used to identify and manage it.
 
 USER: This column shows the username of the user who launched the process. It helps identify which users are running which processes on the system.
-
 PR (Priority): The priority of the process determines its importance in the system's scheduling algorithm. Processes with higher priorities are given more CPU time. Lower values indicate higher priority.
-
 NI (Nice value): The nice value is used to adjust the priority of a process. It ranges from -20 to 19, with lower values indicating higher priority. Processes with higher nice values are less likely to get CPU time, allowing them to run in the background without affecting foreground tasks.
-
 VIRT (Virtual Memory Usage): This column displays the total virtual memory used by the process. It includes all memory the process can access, including shared libraries and memory-mapped files.
-
 RES (Resident Memory Usage): Resident memory usage represents the portion of physical memory (RAM) currently allocated to the process and actively being used.
-
 SHR (Shared Memory Size): This column shows the amount of shared memory used by the process. Shared memory is memory that can be accessed by multiple processes, typically used for inter-process communication.
-
 %CPU (Percentage of CPU Usage): This column displays the percentage of CPU time consumed by the process since the last update of top. It indicates the amount of CPU resources the process is using relative to the total available CPU resources.
-
 %MEM (Percentage of Memory Usage): This column shows the percentage of physical memory (RAM) used by the process relative to the total available memory on the system.
-
 TIME+ (Total CPU Time): This column displays the total CPU time consumed by the process since it started. It includes both user-mode and kernel-mode CPU time.
-
 COMMAND: This column shows the command name or full path of the executable associated with the process. It helps identify what each process is doing based on the command it's running.
 
 Options
 Quit top (q): Pressing q will quit the top command and return you to the terminal prompt.
-
 Kill a process by specifying its PID (k): Press k and then enter the PID (Process ID) of the process you want to kill. After entering the PID, press Enter, and then confirm the action by typing y or Y and pressing Enter again.
-
 Change the priority of a process (r): Press r and then enter the PID of the process for which you want to change the priority. After entering the PID, press Enter, and then you will be prompted to enter the new priority value. Once you've entered the new priority value, press Enter again to confirm the change.
-
 Filter processes by a specific user (u): Press u and then enter the username of the user whose processes you want to filter. After entering the username, press Enter, and top will display only the processes associated with that user.
-
 Sort processes by memory usage (M): Press M to sort the processes by memory usage, with the process using the most memory listed first.
-
 Sort processes by CPU usage (P): Press P to sort the processes by CPU usage, with the process using the most CPU listed first.
-
 Sort processes by PID (N): Press N to sort the processes by PID (Process ID), with the lowest PID listed first.
-
 Select and toggle display of specific fields (f): Press f to bring up a menu that allows you to select and toggle the display of specific fields in the process list. Use the arrow keys to navigate the menu, press Space to select or deselect a field, and press Enter to apply your changes.
 
 Using pgrep Command: If you know the name of the process, you can use pgrep to find the PID. For example, to find the PID of the nginx process:
@@ -181,9 +165,6 @@ sudo apt-get clean = Cleared all cached data of system
 sudo apt-get remove nginx = Delete only software
 sudo apt-get purge nginx = Delete with configuration files
 sudo apt-get dist-upgrade = It perfirm distribution upgrade or updgrade kernal
-
-
-
 
 
 /etc/passwd:
