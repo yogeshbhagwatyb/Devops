@@ -167,6 +167,138 @@ sudo apt-get purge nginx = Delete with configuration files
 sudo apt-get dist-upgrade = It perfirm distribution upgrade or updgrade kernal
 
 
+#############################################################################################
+21/02/24
+#############################################################################################
+
+Upgrade server
+sudo apt-get update = Update server
+sudo apt list --upgradable = To see the list of upgrade pacakges
+sudo apt install --only-upgrade (pacakagename) = Update specific pacakage
+sudo apt upgrade = Upgrade all the pacakge
+
+Crontab
+https://crontab.cronhub.io/ = To see cron time
+crontab -l = To show all the current jobs
+crontab -e = To edit or add new jobs
+*	*	*	*	*
+Minutes (0-59) 
+	Hour (0-23)
+		Day of the month (1-31)
+			Month (1-12)
+				Day of the week (0-6) (Sunday=0)
+Create cron job
+create bash script in /home/ubuntu
+file.sh >> 
+#!/bin/bash
+
+touch newfile
+#
+
+chmod ugo=rwx file.sh
+crontab -e
+40 10 * * * cd /home/ubuntu/ && ./file.sh
+
+Ownership
+sudo chown jenkins:jenbkins file.txt = It will change user and group of file.txt
+sudo chown (user):(group) file.txt
+sudo chgrp jenkins file.txt = It will change group of file.txt
+
+Remove Directory and File
+rm filename
+rmdir directoryname
+rm -rf directoryname
+
+
+What is Kernal
+What is Components of Linux
+What is swap space
+What is alias
+Environment varibale video
+Ownership video = Done
+
+Log rotation demo
+Log rotation config files
+/etc/logrotate.conf
+/etc/logrotate.d
+
+#################################################################################
+Log file location
+/var/log
+cd /var/log
+mkdir myapp = Create directory
+cd /myapp
+mkdir archive
+touch 1.log
+truncate -s 15M 1.log = To incraese size of any file 
+truncate -s (size you want to required) (filename)
+cd /etc/logrotate.d/ = Go to this 
+vim myapp and paste below code
+/var/log/myapp/*.log{
+        daily
+        size 1M
+        olddir /var/log/myapp/archive
+        compress
+}
+
+logrotate -d /etc/logrotate.conf = To see status 
+logrotate /etc/logrotate.conf = Manual trigeering log rotation
+###################################################################################
+
+To send logs to s3
+Configure Nginx Logging:
+Ensure that Nginx is configured to log in a format that's compatible with log rotation. Typically, you'll find this configuration in your Nginx configuration file (nginx.conf). An example log format configuration might look like this:
+log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                '$status $body_bytes_sent "$http_referer" '
+                '"$http_user_agent" "$http_x_forwarded_for"';
+access_log /var/log/nginx/access.log main;
+
+
+Set Up Log Rotation:
+Configure log rotation for Nginx so that logs are rotated daily. This can typically be done using a tool like logrotate in Unix-like systems. Create a log rotation configuration file for Nginx (e.g., /etc/logrotate.d/nginx) with the appropriate settings to rotate logs daily. An example configuration might look like this:
+/var/log/nginx/access.log {
+    daily
+    missingok
+    rotate 7
+    compress
+    delaycompress
+    notifempty
+    create 0640 nginx adm
+    sharedscripts
+    postrotate
+        /etc/init.d/nginx reload > /dev/null
+    endscript
+}
+Adjust the paths and options according to your setup and preferences.
+
+Install AWS CLI:
+Install the AWS Command Line Interface (CLI) if you haven't already. You can follow the instructions provided in the AWS documentation: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
+
+Configure AWS Credentials:
+Configure AWS credentials for the user who will be executing the script to upload logs to S3. You can set up AWS credentials using the aws configure command or by setting environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION).
+
+Write a Script to Upload Logs to S3:
+Write a script that uploads rotated log files to an S3 bucket. Here's an example bash script:
+#!/bin/bash
+
+# Set variables
+LOG_DIR="/var/log/nginx"
+S3_BUCKET="your-s3-bucket"
+DATE=$(date "+%Y-%m-%d")
+
+# Upload rotated log files to S3
+aws s3 cp "$LOG_DIR/access.log-$DATE.gz" "s3://$S3_BUCKET/nginx/access.log-$DATE.gz"
+Adjust the variables LOG_DIR and S3_BUCKET according to your setup.
+
+Schedule Script Execution:
+Schedule the script to run daily using a cron job. Edit the crontab file using crontab -e and add a line like this:
+0 0 * * * /path/to/upload_script.sh
+
+This will execute the script every day at midnight.
+
+By following these steps, Nginx logs will be rotated daily, and the rotated logs will be uploaded to your specified S3 bucket automatically.
+
+
 /etc/passwd:
 Contains information about user accounts on the system, including usernames, user IDs (UIDs), group IDs (GIDs), home directories, and default shells.
 Example entry: username:x:1000:1000:John Doe:/home/username:/bin/bash
