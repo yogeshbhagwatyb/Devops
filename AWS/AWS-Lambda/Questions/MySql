@@ -1,0 +1,33 @@
+MySql
+Installation of MySql
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo systemctl status mysql
+mysql --version
+sudo mysql = To enter in server
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin@123'; = To craete alter user (Then 
+run the following ALTER USER command to change the root user’s authentication method to one that uses a password.
+The following example changes the authentication method to mysql_native_password:)
+
+MySQL provides a script called mysql_secure_installation to perform several security-related tasks. 
+You can run this script by typing:
+sudo mysql_secure_installation
+mysql -u root -p = To login as root and use password "admin@123"
+show databases; = To list the databases
+select version (); = To see the version
+create database admindb; = To create database
+create database (database-name); = To create database
+create user yogi identified by 'admin@123'; = To craete user
+select user from mysql.user; = To see list of user
+sudo systemctl stop mysql.service = To stop the service
+sudo systemctl status mysql.service = To see status of the servi
+sudo systemctl start mysql.service = To start the service
+
+To craete user 
+CREATE USER 'yogi-2'@'184.73.74.120' IDENTIFIED BY 'user@12345';
+GRANT ALL PRIVILEGES ON dbname.* TO 'user1'@'184.73.74.120';
+FLUSH PRIVILEGES;
+OR
+create user yogi identified by 'admin@123'; = To craete user
