@@ -1,0 +1,85 @@
+##############################################################################################################################################
+Add ssh keys to Github
+
+Create key
+	ssh-keygen
+	cd .ssh = Here you can find public key and private key
+You have to upload public on github
+	Repository > Setting > DeployKeys > AddKeys > Give name and paste public key
+Then 
+	Manage jenkins > Credeentials > Sysytem > Global credentilas > Add credentilas > Select SSH username with private key > Paste Private key in
+
+##############################################################################################################################################
+Agent Installation
+
+Dashboard > Manage Jenkins > Nodes > 
+New Node 
+	Node name = Any
+	Type = Permanent Agent (Select) or Copy Existing Node
+	Name = any
+	Description = any
+	Number of executors = any
+	Remote root directory = /home/ubuntu ( You can give any directory but this directory should be present there)
+	Labels = linux (You can give any)
+	Usage = any
+	Launch method = Launch agent by connecting it to the controller
+	Availability = any
+		save
+		
+Dashboard > Manage Jenkins > Configure global securtity
+	Agents =	Fixed (50000)
+				Random
+				Disable
+				
+Node virtual machine
+	sudo apt update
+	sudo apt install fontconfig openjdk-17-jre
+	java -version
+	curl -sO http://34.201.69.205:8080/jnlpJars/agent.jar
+	java -jar agent.jar -url http://34.201.69.205:8080/ -secret 
+	44f8ee4963e5309d6c2723512b53d9d56b44bd57547c6eab748a50da71c5245a -name N1 -workDir "/home/ubuntu"
+	
+Sample pipleine 
+	pipeline {
+    agent {
+        label 'linux'
+    }
+    
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+                sh 'sudo apt update' // Update package lists
+                sh 'sudo apt install -y nginx' // Install Nginx                
+            
+            }
+        }
+    }
+}
+##############################################################################################################################################
+Gmail notification
+
+Dashboard > Manage Jenkins > System
+	E-mail Notification
+		SMTP server = smtp.gmail.com
+		Default user e-mail suffix 
+			Use SMTP Authentication
+				User Name = yogeshbhagwatyb7@gmail.com
+				Password = xggh dimb mfvr gleq ( Paste here "App password = Generate new password (xggh dimb mfvr gleq)" )
+
+	SMTP Port = 465
+	Test configuration by sending test e-mail
+		Test e-mail recipient = yogeshbhagwatyb7@gmail.com
+		
+Gmail configuration
+
+Setting > Security
+	Two step verification = On
+	App password = Generate new password (xggh dimb mfvr gleq)
+	
+Install plug in	
+	Dashboard > Manage Jenkins > Plugins > Availabile > Email Extension TemplateVersion
+
+##############################################################################################################################################
+
