@@ -60,7 +60,7 @@ Sample pipleine
 ##############################################################################################################################################
 Gmail notification
 
-Dashboard > Manage Jenkins > System
+1. Dashboard > Manage Jenkins > System
 	E-mail Notification
 		SMTP server = smtp.gmail.com
 		Default user e-mail suffix 
@@ -72,14 +72,73 @@ Dashboard > Manage Jenkins > System
 	Test configuration by sending test e-mail
 		Test e-mail recipient = yogeshbhagwatyb7@gmail.com
 		
-Gmail configuration
+2. Gmail configuration
 
 Setting > Security
 	Two step verification = On
 	App password = Generate new password (xggh dimb mfvr gleq)
 	
-Install plug in	
+3. Install plug in	
 	Dashboard > Manage Jenkins > Plugins > Availabile > Email Extension TemplateVersion
+	
 
+
+4. Dashboard > Manage Jenkins > System > Extended E-mail Notification
+	SMTP server = smtp.gmail.com
+	SMTP Port = 465
+	Advanced
+		Credentials 
+			username = yogeshbhagwatyb7@gmail.com
+			password = xggh dimb mfvr gleq ( Paste here "App password = Generate new password (xggh dimb mfvr gleq)" )
+			
+5. Post-build Actions
+	Editable Email Notification
+		Project From = admin or any
+		Project Recipient List = yogeshbhagwatyb7@gmail.com
+		Project Reply-To List = yogeshbhagwatyb7@gmail.com (When we replay to mail it will reply "Project Reply-To List = yogeshbhagwatyb7@gmail.com" this mail id
+		Content Type = Plain or Html
+		Default Subject = $DEFAULT_SUBJECT
+		Default Content = Hi email from Jenkins, $DEFAULT_CONTENT
+		Attachments = 
+		Attach Build Log = Attach or Compress and attach or Dont
+		
+##############################################################################################################################################
+
+Webhook
+
+GitRepos setting > Deploy keys > Webhooks > Add Webhooks
+	Payload URL = http://44.202.3.187:8080/github-webhook/
+	Content type = application/json
+	Which events would you like to trigger this webhook = Just the push event(y), Send me everything, Let me select individual events
+		add webhook
+		
+Jenkins
+	Pipeline
+		Build Triggers = GitHub hook trigger for GITScm polling
+	
+##############################################################################################################################################	
+
+Archive to Artifact
+Jenkins
+	Project
+		Post-build Actions
+			Archive the artifacts
+				Files to archive = file.txt
+		Build Steps
+			Execute shell 
+				Command = echo hello > file.txt
+
+Copy artifacts from another project				
+Jenkins
+	Project
+		Add build steps
+			Copy artifacts from another project
+				Project name = Declare project name from where you to copy artifacts
+				Which build = Last build and many more
+				Artifacts to copy = file.txt (Name of the file)
+				Artifacts not to copy =
+				Target directory = 
+				Parameter filters =
+	
 ##############################################################################################################################################
 
