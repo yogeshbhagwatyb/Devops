@@ -137,6 +137,11 @@ tar xvf (File which you want unzip)
 In this we have to zip folder by using command tar and then it will craete file and we need to craete zip file from this
 But we can do it by single command
 tar -zcvf myfile.tgz myfolder = gZip
+-z: Compress the archive using gzip.
+-c: Create a new archive.
+-v: Verbose mode, which displays the progress of the operation.
+-f: Allows you to specify the filename of the archive.
+So, when you run this command, it will create a compressed archive file named myfile.tgz containing all the files and subfolders within the myfolder directory.
 tar -zcvf (entername before .tgz which you to craete file) (folder name which you want to compressed)
 tar -zxvf myfile.tgz myfolder = gZip
 
