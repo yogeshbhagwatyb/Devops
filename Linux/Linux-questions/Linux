@@ -208,6 +208,9 @@ Ownership
 sudo chown jenkins:jenbkins file.txt = It will change user and group of file.txt
 sudo chown (user):(group) file.txt
 sudo chgrp jenkins file.txt = It will change group of file.txt
+sudo chown new_owner file.txt = It will change user of file.txt
+sudo chown john file.txt = It will change user of file.txt
+
 
 Remove Directory and File
 rm filename
