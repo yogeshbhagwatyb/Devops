@@ -606,5 +606,181 @@ count.index: This is a special value that represents the index of the current re
 ${var.subnet_prefixes[count.index]}.0/24: This generates a CIDR block for each subnet by concatenating the subnet prefix from the list with .0/24. For example, if the current subnet prefix is "10.0.1", the resulting CIDR block will be "10.0.1.0/24".
 So, the aws_subnet resource block creates AWS subnets with dynamically generated CIDR blocks based on the subnet prefixes defined in the subnet_prefixes list. Each subnet will have a unique CIDR block within the specified VPC, allowing you to easily create multiple subnets with different IP address ranges using a single resource block.
 
+###############################################################################################################################################
 
+Terraform meta arguments
+count 
+This meta-argument is used to create multiple instances of a resource based on a numeric value.
+It takes an integer value and creates that number of instances of the associated resource.
+For example, count = 3 will create three instances of the resource.
+
+
+for_each
+This meta-argument is used to create multiple instances of a resource based on a map or set of strings.
+It takes a map or set of strings as input and creates instances for each key-value pair or string in the input.
+It allows more flexibility compared to count as it allows creating instances based on keys and values, which can be strings or any other data type.
+For example, for_each = { "host-1" = "t2.micro", "host-2" = "t2.medium" } will create two instances, one with type t2.micro and another with type t2.medium.
+
+
+providers
+This meta-argument allows specifying different providers for resources within the same configuration.
+It allows using resources from different cloud providers or different configurations within the same Terraform project.
+Each provider block can have its own configuration settings like access keys, regions, etc.
+For example, you can have one provider block for AWS and another for Azure within the same Terraform configuration.
+
+
+lifecycle
+This meta-argument is used to configure certain lifecycle behaviors of resources.
+It allows controlling when certain actions, such as creation, updating, or deletion, should occur for resources.
+It can be used to prevent specific resources from being destroyed or updated under certain conditions.
+For example, lifecycle { prevent_destroy = true } prevents the resource from being destroyed accidentally.
+
+depends_on
+This meta-argument is used to specify dependencies between resources.
+It allows ensuring that one resource is created or updated only after another resource has been created or updated.
+It helps in managing dependencies between resources that are not explicitly linked, such as creating a database before launching an application.
+For example, depends_on = [aws_db_instance.example] ensures that the resource is created only after the specified database instance is created.
+
+
+Count
+resource "aws_instance" "myinstance"{
+count = 2
+ami = 123455679
+instance_type = "t2.micro"
+tags = {
+Name = "webserver-${count.index}"
+}
+
+}
+Instance will create with name webserver-0 and webserver-1
+
+
+For_each
+resource "aws_instance" "my-instance" {
+for_each = {
+	host-1 = "t2.micro"
+	host-2 = "t2.medium"
+}
+
+ami = 123456789
+instance_type = each.value
+
+tags = {
+Name = "Webserver-${each.key}"
+}
+}
+In this configuration:
+
+resource "aws_instance" "my-instance": This declares an AWS EC2 instance resource block with the resource type aws_instance and the resource name my-instance.
+
+for_each = { host-1 = "t2.micro", host-2 = "t2.medium" }: This is the for_each meta-argument, which instructs Terraform to create an instance for each key-value pair in the given map. In this case, Terraform will create two instances: one with the key "host-1" and value "t2.micro", and another with the key "host-2" and value "t2.medium".
+
+ami = 123456789: This specifies the Amazon Machine Image (AMI) ID to use for the EC2 instances.
+
+instance_type = each.value: This assigns the value associated with each key in the for_each map to the instance_type attribute of the instances. For instance, the instance with key "host-1" will have an instance type of "t2.micro", and the instance with key "host-2" will have an instance type of "t2.medium".
+
+tags = { Name = "Webserver-${each.key}" }: This sets the Name tag for each instance to "Webserver-{key}", where {key} is the key in the for_each map. This means that each instance will have a unique name tag based on its key. For example, the instance with key "host-1" will have the name tag "Webserver-host-1", and the instance with key "host-2" will have the name tag "Webserver-host-2".
+
+This configuration allows you to dynamically create multiple instances with different types and tags based on the keys and values specified in the for_each map.
+
+3. Providers
+provider "aws" {
+alias = east
+region = "us-east-1"
+}
+
+resource "aws_instance" "my-instance" {
+provider = aws.east
+ami = 123456789
+instance_type = "t2.micro"
+
+tags = {
+Name = "Webserver"
+}
+}
+
+lifecycle {
+create_before_destroy = true
+prevent_destroy = true
+ignore_changes = [tags]
+}
+
+Example of Provider
+provider "aws" {
+  region = "us-west-2"
+  access_key = "your-access-key"
+  secret_key = "your-secret-key"
+}
+
+provider "azurerm" {
+  features {}
+  subscription_id = "your-subscription-id"
+  tenant_id       = "your-tenant-id"
+}
+In this example:
+We have two provider blocks: one for AWS (aws) and another for Azure (azurerm).
+Each provider block specifies the cloud provider (aws or azurerm) that it corresponds to.
+Inside each provider block, you can specify configuration settings specific to that provider. For example, for AWS, you can specify the region, access key, and secret key. For Azure, you can specify the subscription ID and tenant ID.
+This allows you to manage resources from different cloud providers within the same Terraform configuration.
+You can then define resources using the appropriate provider. For example, aws_instance resources will be managed by the AWS provider, and azurerm_virtual_machine resources will be managed by the Azure provider.
+Here's an example of using resources with different providers:
+resource "aws_instance" "example" {
+  provider = aws
+
+  # Specify instance configurations...
+}
+
+resource "azurerm_virtual_machine" "example" {
+  provider = azurerm
+
+  # Specify virtual machine configurations...
+}
+In this way, you can manage resources from multiple cloud providers or different configurations within the same Terraform project using the providers meta-argument.
+
+Lifecycle
+Preventing Destruction of Resources:
+You can use the prevent_destroy option to prevent specific resources from being destroyed. This is useful when you want to protect critical resources from accidental deletion.
+Example:
+resource "aws_instance" "example" {
+  # Resource configuration...
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+Ignoring Changes to Certain Attributes:
+You can use the ignore_changes option to specify attributes that Terraform should ignore during updates. This is useful when certain attributes of a resource are expected to change outside of Terraform's control.
+Example:
+resource "aws_instance" "example" {
+  # Resource configuration...
+
+  lifecycle {
+    ignore_changes = ["tags"]
+  }
+}
+
+Forcing Replacement of Resources:
+You can use the create_before_destroy option to force Terraform to create a new resource before destroying the existing one during updates. This is useful when making significant changes to a resource that require replacement rather than in-place updates.
+Example:
+resource "aws_instance" "example" {
+  # Resource configuration...
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+
+Customizing Resource Creation and Deletion:
+You can use the create_before_destroy and prevent_destroy options together to customize the behavior of resource creation and deletion. This is useful when you want to ensure that a new resource is created before the old one is destroyed and prevent accidental destruction thereafter.
+Example:
+resource "aws_instance" "example" {
+  # Resource configuration...
+
+  lifecycle {
+    create_before_destroy = true
+    prevent_destroy       = true
+  }
+}
 
