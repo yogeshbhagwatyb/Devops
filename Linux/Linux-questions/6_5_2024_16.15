@@ -1,0 +1,592 @@
+How to check schedule jobs
+crontab -l
+If cron job did not work how would you check
+check system time
+crontab entry
+check /var/log/messages
+###########################################################################################################################################
+To check services
+sudo systemctl status jenkins
+sudo systemctl start jenkins
+sudo systemctl restart jenkins
+sudo systemctl stop jenkins
+###########################################################################################################################################
+To see free disk
+df -h = Disk Free/Filesystem in Human readable format
+df -k = Show in kilobyte
+df -m = Show in megbyte
+df -BG = Show in gigabyte
+du -sh /home/ubuntu = Disk Usage of Summary of specified directory rather than all in Human redable format
+du -h /home/ubuntu = Same as above
+###########################################################################################################################################
+Bit (b): A bit is the smallest unit of digital information and can have a value of either 0 or 1. It represents the basic unit of data in computing and telecommunication.
+Byte (B): A byte consists of 8 bits. It is the fundamental unit of digital storage in computing. Bytes are used to measure the size of files, programs, and other data. For example, a text file might be 500 bytes in size.
+Kilobyte (KB): 1 Kilobyte is equal to 1024 bytes
+Megabyte (MB): 1 Megabyte is equal to 1024 kilobytes
+Gigabyte (GB): 1 Gigabyte is equal to 1024 megabytes
+Terabyte (TB): 1 Terabyte is equal to 1024 gigabytes
+Petabyte (PB): 1 Petabyte is equal to 1024 terabytes
+###########################################################################################################################################
+To find folders
+find /path/to/search -type d -name "folder_name"
+find /etc -type d -name "sshd" = d directory 
+find / -type f -name "filename.txt"
+find /home/ubuntu -type f -name "1.txt" = f file
+###########################################################################################################################################
+How to check cpu usage for a process
+ps aux = To see detail view of process
+top = To see utilization and monitoring
+PID (Process ID): This column displays a unique identifier assigned to each process by the operating system. Every process running on the system has a PID, which is used to identify and manage it.
+USER: This column shows the username of the user who launched the process. It helps identify which users are running which processes on the system.
+PR (Priority): The priority of the process determines its importance in the system's scheduling algorithm. Processes with higher priorities are given more CPU time. Lower values indicate higher priority.
+NI (Nice value): The nice value is used to adjust the priority of a process. It ranges from -20 to 19, with lower values indicating higher priority. Processes with higher nice values are less likely to get CPU time, allowing them to run in the background without affecting foreground tasks.
+VIRT (Virtual Memory Usage): This column displays the total virtual memory used by the process. It includes all memory the process can access, including shared libraries and memory-mapped files.
+RES (Resident Memory Usage): Resident memory usage represents the portion of physical memory (RAM) currently allocated to the process and actively being used.
+SHR (Shared Memory Size): This column shows the amount of shared memory used by the process. Shared memory is memory that can be accessed by multiple processes, typically used for inter-process communication.
+%CPU (Percentage of CPU Usage): This column displays the percentage of CPU time consumed by the process since the last update of top. It indicates the amount of CPU resources the process is using relative to the total available CPU resources.
+%MEM (Percentage of Memory Usage): This column shows the percentage of physical memory (RAM) used by the process relative to the total available memory on the system.
+TIME+ (Total CPU Time): This column displays the total CPU time consumed by the process since it started. It includes both user-mode and kernel-mode CPU time.
+COMMAND: This column shows the command name or full path of the executable associated with the process. It helps identify what each process is doing based on the command it's running.
+
+Options
+Quit top (q): Pressing q will quit the top command and return you to the terminal prompt.
+Kill a process by specifying its PID (k): Press k and then enter the PID (Process ID) of the process you want to kill. After entering the PID, press Enter, and then confirm the action by typing y or Y and pressing Enter again.
+Change the priority of a process (r): Press r and then enter the PID of the process for which you want to change the priority. After entering the PID, press Enter, and then you will be prompted to enter the new priority value. Once you've entered the new priority value, press Enter again to confirm the change.
+Filter processes by a specific user (u): Press u and then enter the username of the user whose processes you want to filter. After entering the username, press Enter, and top will display only the processes associated with that user.
+Sort processes by memory usage (M): Press M to sort the processes by memory usage, with the process using the most memory listed first.
+Sort processes by CPU usage (P): Press P to sort the processes by CPU usage, with the process using the most CPU listed first.
+Sort processes by PID (N): Press N to sort the processes by PID (Process ID), with the lowest PID listed first.
+Select and toggle display of specific fields (f): Press f to bring up a menu that allows you to select and toggle the display of specific fields in the process list. Use the arrow keys to navigate the menu, press Space to select or deselect a field, and press Enter to apply your changes.
+
+Using pgrep Command: If you know the name of the process, you can use pgrep to find the PID. For example, to find the PID of the nginx process:
+pgrep process name
+pgrep nginx
+
+To see or find the particular process
+ps aux | grep nginx
+
+To get PID's
+pgrep nginx
+pidof nginx
+
+To delete some process
+ps aux = from here we can get PID
+kill PID
+###########################################################################################################################################
+Networking
+netstat = Network Statatics
+netstat -nr = netstat -n to display Numerical address and r to display kernal Routing table
+Overall, netstat -nr provides a snapshot of the current routing table in the system,
+
+netstat -putn 
+-putn: These are options (flags) that modify the behavior of the netstat command:
+-p: This option tells netstat to display the process ID (PID) and the name of the program that owns each socket or network connection.
+-u: This option tells netstat to display UDP (User Datagram Protocol) connections.
+-t: This option tells netstat to display TCP (Transmission Control Protocol) connections.
+-n: This option tells netstat to display numerical addresses instead of resolving hostnames and service names. It prevents netstat from performing DNS resolution, which can speed up the command's execution.
+ 
+netstat -putn | grep :22 = to find particulary :22 connection
+###########################################################################################################################################
+Password authentication file
+/etc/ssh/sshd_config
+
+Sudoers file to give permission
+/etc/sudoers 
+user1   ALL=(ALL:ALL) ALL
+
+SSH from another sever
+Server1
+adduser user1 = Create user
+vim /etc/ssh/sshd_config = Yes on Password authentication
+sudo systemctl restart sshd = Reload sshd
+Server2 
+ssh user@Server1publicip
+###########################################################################################################################################
+What is Kernal
+What is Components of Linux
+What is swap space
+What is alias
+Environment varibale video
+Ownership video
+
+###########################################################################################################################################
+
+SCP
+Secure Copy file and directiories between local and remote or two remote system
+scp -i /path/to/private_key.pem /path/to/local/file.txt user@remote_host:/path/to/destination
+scp -i mykey.pem /home/ubuntu/1.txt ubuntu@34.201.69.205:/home/ubuntu = for local to remote and remote to remote with public and private ip
+
+###########################################################################################################################################
+
+Remote to Remote 
+Upload pemfile on server and give read write permissions to user 
+chmod u=rw
+chmod go=
+or chmod u=rw, go=
+scp -i mykey.pem /home/ubuntu/1.txt ubuntu@34.201.69.205:/home/ubuntu
+
+###########################################################################################################################################
+
+Remote to local
+scp -i key.pem ubuntu@34.229.177.56:/home/ubuntu/2.txt "\c\Users\12816\Desktop\Azure"
+
+###########################################################################################################################################
+
+To check pacakage installed or not
+dpkg --get-selections | grep package_name = Debian Pacakge Manager
+
+To check number and type of processors used by linux
+cat /proc/cpuinfo
+lscpu
+
+To zip and unzip file
+gzip filename
+gunzip filename
+
+To zip and unzip folders
+In this we have to zip folder by using command tar and then it will craete file and we need to craete zip file from this and final output of file is myfile.tar.gz
+tar cvf file.tar newfolder = Tape ARchive Create an archive Versbose Filename of the archive 
+-c: This option specifies that you want to create an archive.
+-v: This option stands for "verbose" and will display a list of files being archived.
+-f: This option allows you to specify the filename of the archive.
+tar cvf (entername before .tar which you to craete file) (folder name which you want to compressed)
+
+tar xvf file.tar = EXtract
+tar xvf (File which you want unzip)
+
+###########################################################################################################################################
+
+In this we have to zip folder by using command tar and then it will craete file and we need to craete zip file from this
+But we can do it by single command
+tar -zcvf myfile.tgz myfolder = gZip
+tar -zcvf (entername before .tgz which you to craete file) (folder name which you want to compressed)
+tar -zxvf myfile.tgz myfolder = gZip
+
+###########################################################################################################################################
+
+To see all the environment variables
+env
+printenv
+
+Which command displays memory usage including the ammount of swap space being used
+free -h = Human readable
+
+In short, the lsblk command lists information about block devices (storage devices) attached to the system, including their names, sizes, and relationships, in a hierarchical view.
+lsblk
+lsblk -f
+
+To see about vm
+cat /etc/os-release
+cat /etc/issue
+uname -a
+
+###########################################################################################################################################
+
+Pacakage management 
+sudo apt-get update = To update the system, 
+sudo apt-get upgrade = To upgrade the system, In upgrade it will delete older version or files and moved to new and we cannot rollback
+/var/cache/apt/archives = Saved all cached files
+sudo apt-get clean = Cleared all cached data of system
+sudo apt-get remove nginx = Delete only software
+sudo apt-get purge nginx = Delete with configuration files
+sudo apt-get dist-upgrade = It perfirm distribution upgrade or updgrade kernal
+
+Upgrade server
+sudo apt-get update = Update server
+sudo apt list --upgradable = To see the list of upgrade pacakges
+sudo apt install --only-upgrade (pacakagename) = Update specific pacakage
+sudo apt upgrade = Upgrade all the pacakge
+
+#############################################################################################
+
+Crontab
+https://crontab.cronhub.io/ = To see cron time
+crontab -l = To show all the current jobs
+crontab -e = To edit or add new jobs
+*	*	*	*	* 
+Minutes (0-59) 
+	Hour (0-23)
+		Day of the month (1-31)
+			Month (1-12)
+				Day of the week (0-6) (Sunday=0)
+Create cron job
+create bash script in /home/ubuntu
+file.sh >> 
+#!/bin/bash
+
+touch newfile
+#
+
+chmod ugo=rwx file.sh
+crontab -e
+40 10 * * * cd /home/ubuntu/ && ./file.sh
+
+#####################################################################################################
+Permission
+Folder
+chmod ugo=rwx foldername
+drwxrwxr-x 2 test test 4.0K Apr 10 09:27 1t
+d = directory, rwx = Owner permission, rwx = Group permission, rwx = Other permission ((users who are not the owner or in the group))
+File
+chmod ugo=rwx filename
+-rwxrwxrwx 1 test test 0 Apr 10 09:27 1.txt
+- = file, rwx = Owner permission, rwx = Group permission, rwx = Other permission ((users who are not the owner or in the group))
+u = User, g = Group, o = Other
+Commands
+chmod ugo=rwx 
+ugo=rwx sets the permissions for the owner, group, and others to read, write, and execute.
+#####################################################################################################
+Ownership
+sudo chown jenkins:jenbkins file.txt = It will change user and group of file.txt
+sudo chown (user):(group) file.txt
+sudo chgrp jenkins file.txt = It will change group of file.txt
+sudo chown admin file.txt = It will change owner of file.txt
+#####################################################################################################
+Remove Directory and File
+rm filename
+rmdir directoryname
+rm -rf directoryname
+#####################################################################################################
+Adding in users in group
+sudo addgroup jenkins = To create group which name is jenkins
+sudo addgroup group_name = To create group which name is jenkins
+cat /etc/group = To list all the group 
+cat /etc/passwd = To list all the users
+sudo usermod -aG jenkins test
+sudo usermod -aG group_name username
+sudo: This is a command that allows users to run programs with the security privileges of another user, by default the superuser (usually root). It's often used to perform administrative tasks, as it provides elevated privileges.
+usermod: This is a command used in Unix-like operating systems to modify user account properties. In this case, it's being used to modify group membership.
+-aG: These are options used with the usermod command:
+-a: This option stands for "append." It tells usermod to append the user to the supplemental groups specified without removing the user from other groups.
+-G: This option specifies the group(s) to which the user will be added.
+group_name: This is the name of the group to which you want to add the user. Replace group_name with the actual name of the group. For example, if you have a group named "developers" and you want to add the user "test" to it, you would replace group_name with "developers".
+username: This is the name of the user you want to add to the group. Replace username with the actual username. In this case, you want to add the user "test" to the group, so you would replace username with "test".
+groups test = To see user added in which groups
+groups username = To see user added in which groups
+#####################################################################################################
+What is Kernal
+What is Components of Linux
+What is swap space
+What is alias
+Environment varibale video
+Ownership video = Done
+
+Log rotation demo
+Log rotation config files
+/etc/logrotate.conf
+/etc/logrotate.d
+
+#################################################################################
+Log file location
+/var/log
+cd /var/log
+mkdir myapp = Create directory
+cd /myapp
+mkdir archive
+touch 1.log
+truncate -s 15M 1.log = To incraese size of any file 
+truncate -s (size you want to required) (filename)
+cd /etc/logrotate.d/ = Go to this 
+vim myapp and paste below code
+/var/log/myapp/*.log{
+        daily
+        size 1M
+        olddir /var/log/myapp/archive
+        compress
+}
+
+logrotate -d /etc/logrotate.conf = To see status 
+logrotate /etc/logrotate.conf = Manual trigeering log rotation
+###################################################################################
+
+To send logs to s3
+Configure Nginx Logging:
+Ensure that Nginx is configured to log in a format that's compatible with log rotation. Typically, you'll find this configuration in your Nginx configuration file (nginx.conf). An example log format configuration might look like this:
+log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                '$status $body_bytes_sent "$http_referer" '
+                '"$http_user_agent" "$http_x_forwarded_for"';
+access_log /var/log/nginx/access.log main;
+
+
+Set Up Log Rotation:
+Configure log rotation for Nginx so that logs are rotated daily. This can typically be done using a tool like logrotate in Unix-like systems. Create a log rotation configuration file for Nginx (e.g., /etc/logrotate.d/nginx) with the appropriate settings to rotate logs daily. An example configuration might look like this:
+/var/log/nginx/access.log {
+    daily
+    missingok
+    rotate 7
+    compress
+    delaycompress
+    notifempty
+    create 0640 nginx adm
+    sharedscripts
+    postrotate
+        /etc/init.d/nginx reload > /dev/null
+    endscript
+}
+Adjust the paths and options according to your setup and preferences.
+
+Install AWS CLI:
+Install the AWS Command Line Interface (CLI) if you haven't already. You can follow the instructions provided in the AWS documentation: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
+
+Configure AWS Credentials:
+Configure AWS credentials for the user who will be executing the script to upload logs to S3. You can set up AWS credentials using the aws configure command or by setting environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION).
+
+Write a Script to Upload Logs to S3:
+Write a script that uploads rotated log files to an S3 bucket. Here's an example bash script:
+#!/bin/bash
+
+# Set variables
+LOG_DIR="/var/log/nginx"
+S3_BUCKET="your-s3-bucket"
+DATE=$(date "+%Y-%m-%d")
+
+# Upload rotated log files to S3
+aws s3 cp "$LOG_DIR/access.log-$DATE.gz" "s3://$S3_BUCKET/nginx/access.log-$DATE.gz"
+Adjust the variables LOG_DIR and S3_BUCKET according to your setup.
+
+Schedule Script Execution:
+Schedule the script to run daily using a cron job. Edit the crontab file using crontab -e and add a line like this:
+0 0 * * * /path/to/upload_script.sh
+
+This will execute the script every day at midnight.
+
+By following these steps, Nginx logs will be rotated daily, and the rotated logs will be uploaded to your specified S3 bucket automatically.
+
+###########################################################################################################################################
+
+/etc/passwd:
+Contains information about user accounts on the system, including usernames, user IDs (UIDs), group IDs (GIDs), home directories, and default shells.
+Example entry: username:x:1000:1000:John Doe:/home/username:/bin/bash
+
+/etc/shadow:
+Stores encrypted password and password-related information for user accounts.
+Accessible only by the root user and the shadow group.
+Example entry: username:$6$H8X0/Lu7$ExoXqQVBlMtpSG6.J7n0DvFayZ1ldSdQHLkj3aCY1QZyCJQrvEoDP8n9TQGZ5.b...:18912:0:99999:7:::
+
+/etc/group:
+Contains information about groups on the system, including group names, GIDs, and a list of member usernames.
+Example entry: groupname:x:1001:user1,user2,user3
+
+/etc/ssh/sshd_config:
+Configuration file for the OpenSSH server (sshd). Defines settings for SSH server behavior, security, and authentication.
+Example settings: Port 22, PermitRootLogin no, PasswordAuthentication yes
+
+/etc/sudoers:
+Configuration file for the sudo command. Defines which users and groups are allowed to run commands as superusers and with what privileges.
+Accessed and edited using the visudo command.
+Example entry: john ALL=(ALL:ALL) ALL
+
+/etc/profile:
+A system-wide shell initialization file executed for login shells. Defines environment variables and sets up the user's shell environment.
+System-wide configuration that affects all users.
+Commonly used to set the PATH variable and define global environment settings.
+
+/etc/hosts:
+A simple text file that maps IP addresses to hostnames and is used for local DNS resolution.
+Typically used for defining local hostnames and IP addresses, especially in small networks or for testing purposes.
+
+/etc/fstab:
+Configuration file that contains information about disk drives and partitions. Defines how and where filesystems should be mounted during the system boot process.
+Example entry: /dev/sda1 / ext4 defaults 0 1
+
+/etc/resolv.conf:
+Configuration file for DNS resolver library. Specifies the DNS servers, domain search order, and other resolver options.
+Example entry: nameserver 8.8.8.8
+
+/etc/nologin:
+A file that, when present, prevents non-root users from logging into the system. It is commonly used to temporarily disable logins during maintenance or system changes.
+
+#############################################################################
+PATH = /opt/apache-maven-3.6.3/bin:$PATH
+
+mvn clen install = To build maven project
+cd /opt/apache-tomcat/bin here we have
+startup.sh and shutdown.sh
+
+/var/lib/jenkins/workspace here we found jenkins work
+
+###########################################################################################################################################
+
+OS
+An operating system (OS) is a software program that serves as an intermediary between users and computer hardware. It manages computer hardware resources, provides a platform for running applications, and facilitates communication between hardware and software components.
+Here are some key functions of an operating system:
+Resource Management: The operating system manages computer hardware resources such as the CPU, memory (RAM), storage devices (hard drives, SSDs), input/output devices (keyboard, mouse, monitor), and network devices. It allocates resources efficiently among running programs to ensure optimal performance.
+Process Management: The OS controls the execution of programs or processes. It creates, schedules, and terminates processes, allowing multiple programs to run simultaneously (multitasking) while ensuring fair access to system resources.
+Memory Management: The operating system manages system memory (RAM) by allocating memory space to processes as needed. It also handles virtual memory, allowing processes to use more memory than physically available by swapping data between RAM and disk storage.
+File System Management: The OS provides a file system that organizes and stores data on storage devices. It manages files, directories, and file access permissions, allowing users and applications to read, write, and manipulate files stored on the system.
+Device Management: The operating system interacts with hardware devices such as printers, scanners, disk drives, and network interfaces through device drivers. It controls device communication, handles input/output operations, and manages device configurations.
+User Interface: The OS provides a user interface through which users interact with the computer. This can be a command-line interface (CLI) where users type commands, a graphical user interface (GUI) with windows, icons, and menus, or a combination of both.
+Security: Operating systems implement security measures to protect the system and user data from unauthorized access, malware, and other security threats. This includes user authentication, access control mechanisms, encryption, and antivirus software integration.
+Common examples of operating systems include Microsoft Windows, macOS (formerly OS X), Linux, Unix, and Android. Each operating system has its own features, design principles, and target platforms, catering to different user needs and computing environments.
+
+Kernel: At the core of Linux lies the kernel, which serves as the bridge between hardware and software. It manages system resources such as CPU, memory, peripherals, and provides essential functionalities like process management, memory management, device drivers, and system calls. The Linux kernel is monolithic, meaning that it runs in privileged mode and directly interacts with hardware.
+It's a piece of software that acts as the middleman between your computer's hardware (like the keyboard, mouse, and processor) and the software you use (like your web browser or word processor).
+Here's what the kernel does:
+Hardware Management: It makes sure that different parts of your computer, like the processor, memory, and disk drives, work together smoothly.
+Process Management: Think of it as a traffic controller. It manages the different programs running on your computer, making sure they don't interfere with each other and get their fair share of resources.
+Memory Management: It keeps track of how much memory each program is using and allocates memory to them as needed. This helps prevent programs from crashing due to lack of memory.
+Device Drivers: Your computer has various hardware devices like printers, scanners, and graphics cards. The kernel talks to these devices through special programs called device drivers, making sure they work correctly.
+System Calls: Programs need to ask the kernel to do things like reading files from disk or accessing the network. These requests are called system calls, and the kernel handles them.
+In short, the kernel is the core part of your computer's operating system that handles all the behind-the-scenes work, making sure everything runs smoothly and your computer does what you want it to do.
+
+System Library:
+System libraries are some predefined functions by using which any application programs or system utilities can access kernel’s features. These libraries are the foundation upon which any software can be built.
+These libraries contain pre-made functions that perform common tasks, like reading files, managing memory, or connecting to the internet. Instead of writing these functions from scratch, developers can just use the ones provided by the library.
+System libraries contain a collection of pre-written functions that perform common tasks. These functions can be reused by multiple programs, saving developers time and effort by avoiding the need to rewrite the same code for similar tasks in different programs.
+Some of the most common system libraries are:
+GNU C library: This is the C library that provides the most fundamental system for the interface and execution of C programs. This provides may in-built functions for the execution.
+libpthread (POSIX Threads): This library plays important role for multithreading in Linux, it allows users for creating and managing multiple threads.
+libdl (Dynamic Linker): This library is responsible for the loading and linking file at the runtime.
+libm (Math Library): This library provides user with all kind of mathematical function and their execution.
+Some other system libraries are: librt (Realtime Library), libcrypt (Cryptographic Library), libnss (Name Service Switch Library), libstdc++ (C++ Standard Library)
+
+
+System utilities
+System utilities for Linux are tools or programs that help you manage and control your computer system. They perform various tasks like monitoring system performance, managing files, configuring settings, and troubleshooting issues. Here are some common system utilities and what they do:
+Terminal/Command Line: This is like the control center of your computer. You can type commands to perform tasks such as navigating files, installing software, or checking system information.
+File Manager: Just like the file explorer in Windows, it helps you navigate through your files and folders, move, copy, or delete them.
+Task Manager: It shows you what programs are running, how much memory and CPU they're using, and allows you to end tasks if needed to free up resources.
+Disk Usage Analyzer: This tool helps you see what's taking up space on your hard drive, so you can manage your disk space more efficiently.
+Package Manager: It's used for installing, updating, and removing software packages on your system. You can think of it as an app store for Linux.
+System Monitor: Similar to Task Manager, it gives you an overview of your system's performance, including CPU usage, memory usage, network activity, etc.
+Text Editor: A simple tool for creating and editing text files. It's useful for writing scripts, configuring system settings, or editing code.
+Backup Software: Helps you create backups of your important files and settings, so you can restore them in case of data loss or system failure.
+Firewall Configuration Tool: Allows you to control the incoming and outgoing network traffic to protect your system from unauthorized access.
+Terminal Multiplexer: These utilities allow you to run multiple terminal sessions within a single terminal window, which can be very useful for managing multiple tasks simultaneously.
+These utilities are essential for managing and maintaining a Linux system, and understanding how to use them can greatly enhance your experience with the operating system.
+
+Raghulraj had given me task, Task is "After completing the Azure pipeline build, an automated email notification is triggered, including the log file as an attachment"
+So i have done this task and related to such task i am exploring more in Azure Devops
+
+Shell
+A shell is like a command-line interface or a text-based user interface where you can interact with the operating system by typing commands. It's like a bridge between you and the computer, allowing you to tell the computer what to do.
+Here's a bit more detail:
+Interface: Think of the shell as a window into the guts of your operating system. Instead of clicking icons or buttons like you would in a graphical user interface (GUI), you type commands and the computer responds with text output.
+Commands: You can execute various commands in the shell to perform tasks such as creating files, copying data, navigating through directories, and more. These commands are often simple words or abbreviations, like "ls" to list files or "cd" to change directories.
+Scripting: Shells also support scripting, which means you can write sequences of commands into a file (called a script) and then execute that file as if it were a single command. This is powerful for automating tasks or running complex operations.
+Customization: Users can customize their shell experience by configuring settings, defining aliases (shortcuts for commands), and even creating custom functions or scripts to extend the shell's capabilities.
+Types of Shells: There are different types of shells available for Linux, with "Bash" (Bourne Again Shell) being one of the most common. Other popular shells include "Zsh" (Z Shell) and "Fish" (Friendly Interactive Shell). Each shell has its own features and syntax, but they all serve the same basic purpose.
+Overall, the shell is a powerful tool for interacting with Linux systems, offering flexibility, efficiency, and the ability to perform a wide range of tasks from the command line
+###########################################################################################################################################
+Swap memory
+In simple terms, swap memory in Linux is like extra storage space that the computer uses when it runs out of regular memory (RAM). Imagine your computer's memory (RAM) as a workspace where it keeps things it's currently working on. But if it runs out of space in that workspace, it moves some less important stuff to the swap space, which is like a temporary storage area on the hard drive.
+So, when your computer is juggling a lot of tasks and needs more memory than it has, it swaps out less important stuff from RAM to the swap space to make room for what's important. Later, if it needs that data again, it can swap it back from the swap space to RAM. This helps keep the computer running smoothly, but accessing data from swap space is slower than from RAM, so it's best to have enough RAM to avoid swapping too much.
+###########################################################################################################################################
+Scenario
+Solution
+Error
+Results
+###########################################################################################################################################
+**************
+6_5_2024_16.15
+**************
+Upgrade linux server
+1. Backup
+BackUp Management / upgrade linux server
+File-Level Backup
+	Backup of /etc
+	sudo tar -cvpzf /home/ubuntu/destination/backup.tar.gz --exclude={"/dev","/proc","/sys","/tmp","/run","/mnt","/media","/lost+found"} /etc
+	sudo: This command is run with superuser privileges, allowing you to perform operations that require administrative permissions.
+	tar: This is the command-line utility for creating and manipulating tar archives.
+	-cvpzf: These are options passed to tar:
+	-c: This option stands for "create," indicating that you want to create a new archive.
+	-v: This option enables verbose output, providing more detailed information about the files being archived.
+	-p: This option preserves file permissions and ownership when creating the archive.
+	-z: This option compresses the archive using gzip.
+	-f: This option specifies the name of the archive file.
+	/home/ubuntu/destination/backup.tar.gz: This is the path and name of the tar archive that will be created. In this case, it will be saved as backup.tar.gz in the /home/ubuntu/destination/ directory.
+	--exclude={"/dev","/proc","/sys","/tmp","/run","/mnt","/media","/lost+found"}: This option specifies directories to be excluded from the backup process. These directories are system-specific and are commonly excluded in backups as they typically contain temporary or system-specific files that are not necessary for backup purposes.
+	/etc: This is the source directory that you want to archive. In this case, it's the /etc directory, which typically contains system configuration files on Unix-like operating systems.
+	So, overall, this command creates a compressed tar archive (backup.tar.gz) of the /etc directory while excluding specified system directories and saves it in /home/ubuntu/destination/.
+
+	mkdir -p /home/ubuntu/destination = To create destination folder
+	
+	sudo tar -cvpzf /path/to/backup.tar.gz --exclude={"/dev","/proc","/sys","/tmp","/run","/mnt","/media","/lost+found"} /
+	
+	sudo: This command is used to execute the subsequent command with elevated privileges. It allows the tar command to access and read files that might require superuser permissions.
+	tar: This is a command-line utility used to compress and archive files and directories.
+	-c: This option stands for "create." It instructs tar to create a new archive.
+	-v: This option stands for "verbose." When used, tar will output the names of the files or directories being archived.
+	-p: This option preserves the permissions of the files being archived. Without this option, the permissions would be set based on the umask of the user extracting the archive.
+	-z: This option tells tar to compress the archive using gzip.
+	-f: This option specifies the filename of the archive to create.
+	/path/to/backup.tar.gz: This is the filename and path of the archive that tar will create. In this case, it's /path/to/backup.tar.gz.
+	--exclude={"/dev","/proc","/sys","/tmp","/run","/mnt","/media","/lost+found"}: This option specifies directories to exclude from the backup. It uses the --exclude flag followed by a list of directories enclosed in curly braces {}. These directories are excluded because they typically contain temporary or system-specific files that are unnecessary for a backup.
+	/: This is the root directory. In this command, it specifies that tar should start archiving from the root directory, meaning it will include all files and directories starting from the root of the filesystem.
+
+	Database Backup
+	mysqldump -u username -p database_name > backup.sql
+	Replace username with your MySQL username, database_name with the name of the database you want to back up, and backup.sql with the desired filename for the backup file.For example, if your MySQL username is myuser and you want to back up a database named mydatabase, you would run:
+	mysqldump -u myuser -p mydatabase > backup.sql
+	After running the command, you'll be prompted to enter your MySQL password. Enter the password associated with the specified username and press Enter.
+	The mysqldump command will dump the contents of the specified database into a SQL file named backup.sql. This file will contain SQL statements necessary to recreate the database structure and insert the data.
+	Once the command completes, you'll have a backup file (backup.sql) containing the contents of your MySQL database.
+	Remember to store the backup file (backup.sql) in a secure location. You can use this backup file to restore your database if needed by importing it into MySQL using the mysql command.
+
+2. Check current version: Determine the current version of your Linux distribution. 
+You can usually do this by running the following command:
+root@ip-172-31-18-28:/# lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 24.04 LTS
+Release:        24.04
+Codename:       noble
+	
+3. Update packages: Before upgrading the distribution, ensure all installed packages are up to date. Run the following commands to update the package list and upgrade installed packages:
+	sudo apt update
+	sudo apt upgrade
+	
+4. Upgrade process: The method for upgrading the Linux distribution varies depending on the distribution itself. For Debian-based systems like Ubuntu, you typically use the do-release-upgrade command. For example:
+	sudo do-release-upgrade
+	
+5. Reboot: After the upgrade process completes successfully, it's recommended to reboot the server to apply any necessary changes:
+	sudo reboot
+Backup process completed
+************************
+Rollback
+	Files
+	Boot into Recovery or Live Environment: If your system is currently running the upgraded version and you want to rollback, you'll need to boot into a recovery environment or a live CD/USB with a compatible version of Ubuntu.
+	Prepare Disk: Mount the partition where you want to restore the backup. If necessary, you may need to format or clear the existing data on the partition.
+	Extract Backup: Use the tar command to extract the backup into the target directory. Make sure to extract it to the root of the filesystem ("/").
+	sudo tar -xvpzf /path/to/backup.tar.gz -C /target/directory
+	Replace "/path/to/backup.tar.gz" with the path to your backup file and "/target/directory" with the mount point of the partition you want to restore to.
+	Update Bootloader: If your backup includes system files or configuration changes related to the bootloader (GRUB), you may need to reinstall or update the bootloader to ensure the system boots correctly. You can do this using the grub-install command.
+	Reboot: Once the extraction is complete and any necessary bootloader configuration has been updated, reboot the system. It should now boot into the previous state as per the backup.
+	Verify: After rebooting, verify that the system has been rolled back to the previous state and that all necessary services and configurations are functioning correctly.
+	Rolling back a system using a backup can be complex, and it's important to ensure that you have a clear understanding of the process and any potential risks involved. Additionally, make sure to back up any critical data before attempting a rollback, as it may result in data loss if not done properly. If you're unsure about any step in the process, consider seeking assistance from a professional or consulting the official documentation for your Linux distribution.
+
+	RDS
+	If you've taken a backup of your MySQL database using mysqldump, you can potentially use that backup to restore your database to its previous state. Here's a general outline of the steps you could take to rollback your MySQL database using the backup:
+
+	Access MySQL Shell: Log in to your MySQL server using the MySQL shell. You'll need the MySQL username and password that you used when taking the backup.
+	mysql -u username -p
+
+	Drop Existing Database (Optional): If you want to completely replace the existing database with the backup, you can drop the existing database and recreate it. Be extremely cautious with this step, as it will permanently delete all data in the database.
+	DROP DATABASE database_name;
+	CREATE DATABASE database_name;
+
+	Restore Database from Backup: Use the mysql command to restore the database from the backup file (backup.sql). Make sure to specify the database name if you haven't dropped and recreated the database.
+	mysql -u username -p database_name < backup.sql
+	Replace username with your MySQL username, database_name with the name of the database you're restoring, and backup.sql with the path to your backup file.
+
+	Verify: After restoring the database, verify that the data has been successfully restored by querying the database.
+	USE database_name;
+	SHOW TABLES;
+
+	This will display a list of tables in the restored database. You can also run other queries to ensure that the data is as expected.
+	That's it! Your MySQL database should now be rolled back to the state it was in when you took the backup. Make sure to test your applications thoroughly to ensure that everything is functioning correctly after the rollback. Additionally, always ensure that you have recent backups of your data before attempting any major operations like database rollback.
+
+###########################################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
